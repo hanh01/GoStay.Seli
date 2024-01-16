@@ -1,0 +1,384 @@
+@using GoStay.Peter
+@using GoStay.Seli.srcComponent
+@using System.Collections.ObjectModel
+@using HotelApiV56.Model
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+
+@if (Users != null )
+{
+    <section class="h-full">
+        <div class="sticky top-0 z-30">
+             <NavBar></NavBar>
+        </div>
+
+        <div class="container mx-auto lg:px-36 px-5 pt-14">
+            <div class="grid lg:grid-cols-4 col-span-1 gap-2 w-full ">
+                <div class="col-span-1 lg:flex lg:flex-col hidden h-[500px] border border-gray-300 rounded-xl pb-10">
+                    <div class="grid place-content-center py-6">
+                        <img class="h-[130px] w-[130px] rounded-full overflow-hidden"
+                             src=@AvatarUrl alt=""/>
+                    </div>
+                    <div class="px-5 flex flex-col gap-4">
+                        <div class="flex gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+                            </svg>
+                            <p class="font-medium">@Users.GohomeUserReview.Count đánh giá</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                            </svg>
+                            <p class="font-medium">Đã xác minh danh tính</p>
+                        </div>
+                        <hr class="border-gray-200 my-4">
+                        <p class="text-xl font-medium">@Users.GohomeUser.Fullname đã xác nhận</p>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                </svg>
+                                <p>Danh tính</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                </svg>
+                                <p>Địa chỉ Email</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                </svg>
+                                <p>Số điện thoại</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-3 lg:pl-20 pl-0 pb-20">
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="sm:text-4xl text-2xl font-medium">Xin chào, tôi là @Users.GohomeUser.Fullname</p>
+                            <p class="text-xs leading-loose text-neutral-500">đã tham gia @CreatAt</p>
+                            <div class="flex flex-col lg:hidden pt-5 gap-5">
+                                <div class="flex gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+                                    </svg>
+                                    <p class="font-medium">@Users.GohomeUserReview.Count đánh giá</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+                                    </svg>
+                                    <p class="font-medium">Đã xác minh danh tính</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex lg:hidden ">
+                            <img class="sm:h-[80px] sm:w-[80px] h-[60px] w-[60px] object-cover rounded-full overflow-hidden"
+                                 src=@AvatarUrl alt="">
+                        </div>
+                    </div>
+                    <hr class="flex lg:hidden border-gray-200 my-4">
+                    @* giới thiệu  *@
+                    <div>
+                        <p class="sm:text-2xl text-xl font-medium lg:pt-7 pt-3 pb-5">Giới thiệu</p>
+                        <div class="flex gap-2 pb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+                                <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 011.414 0l7 7A1 1 0 0117 11h-1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-3a1 1 0 00-1-1H9a1 1 0 00-1 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-6H3a1 1 0 01-.707-1.707l7-7z" clip-rule="evenodd"/>
+                            </svg>
+                            <p>@(Users.GohomeUser.Address != "" ? Users.GohomeUser.Address : "Chưa cập nhật")</p>
+                        </div>
+                        <hr class="border-gray-200 my-4">
+                    </div>
+
+                    @* xác nhận danh tính *@
+                    <div class="flex flex-col lg:hidden ">
+                        <p class="sm:text-2xl text-xl font-medium lg:pt-7 pt-3 pb-5">@Users.GohomeUser.Fullname đã xác nhận</p>
+                        <div class="grid sm:grid-cols-3 grid-cols-2 gap-4">
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                </svg>
+                                <p>Danh tính</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                </svg>
+                                <p>Địa chỉ Email</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 stroke-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                                </svg>
+                                <p>Số điện thoại</p>
+                            </div>
+                        </div>
+                        <hr class="border-gray-200 my-4">
+                    </div>
+
+                    @* list rooms by host *@
+                    @if (Users.GohomeUser.IsHost)
+                    {
+                        <div class="lg:w-full w-[350px]">
+                            <p class="sm:text-2xl text-xl font-medium lg:pt-7 pt-3 pb-5">Nhà/phòng cho thuê của @Users.GohomeUser.Fullname</p>
+                            <div class="relative">
+                                <div class="slider-room-by-host">
+                                    @foreach (var room in ListRoomsByHost)
+                                    {
+                                        @if (room.ThumbnailUrls != "")
+                                        {
+                                            <a href="/detail-rooms/@room.Id">
+                                                <div class="flex flex-col pr-4">
+                                                    <img class="h-[230px] rounded-lg"
+                                                         src="@room.ThumbnailUrls.Split("\n")[0]" alt=""/>
+                                                    <div class="text-sm font-sans py-3">
+                                                        <p class="text-xs uppercase text-gray-600 mb-2">@room.Name</p>
+                                                        <p class="hover:text-[#f65e39]">@room.Address</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        }
+                                    }
+                                </div>
+                                <button
+                                    class="prev absolute top-0 -left-3.5 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                                    <span
+                                        class="inline-flex items-center justify-center rounded-full w-10 h-10 bg-white/30 shadow-sm shadow-gray-300 group-hover:shadow-orange-300 hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 " fill="none"
+                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                                            </path>
+                                        </svg>
+                                        <span class="sr-only">Previous</span>
+                                    </span>
+                                </button>
+                                <button
+                                    class="next absolute top-0 right-0 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                                    <span
+                                        class="inline-flex items-center justify-center rounded-full w-10 h-10 bg-white/30 shadow-sm shadow-gray-300 group-hover:shadow-orange-300  hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 " fill="none"
+                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                            </path>
+                                        </svg>
+                                        <span class="sr-only">Next</span>
+                                    </span>
+                                </button>
+                            </div>
+                            <hr class="border-gray-200 my-4">
+                        </div>
+                    }
+
+                    @* comment *@
+                    <div class="flex flex-col gap-5 pt-4">
+                        <div class="flex gap-2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"/>
+                            </svg>
+                            <p class="text-xl font-medium">@Users.GohomeUserReview.Count lượt đánh giá</p>
+                        </div>
+                        @* tab *@
+                        @if (Users.GohomeUser.IsHost)
+                        {
+                            <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+                                <ul class="flex flex-wrap -mb-px">
+                                    <button class="mr-2 tab-links" @onclick="ClickTabGuest">
+                                        <p href="#" class="inline-block p-4 rounded-t-lg  @CssBtnGuest">Từ khách (@Data?.Pageing.TotalRecords)</p>
+                                    </button>
+                                    <button class="mr-2 tab-links" @onclick="ClickTabHost">
+                                        <p href="#" class="inline-block p-4 rounded-t-lg border-b-2 @CssBtnHost">Từ chủ nhà (@Users.GohomeUserReview.Count)</p>
+                                    </button>
+                                </ul>
+                            </div>
+                        }
+                        <div class="tab-guest @Guest">
+                            @foreach (var review in HostReview)
+                            {
+                                <div class="pb-3">
+                                    <div class="flex gap-3">
+                                        <a href="/detail-rooms/@review.Listing.Id">
+                                            <img class="h-[60px] w-[100px] object-cover rounded-md overflow-hidden"
+                                                 src="@review.Listing.ThumbnailUrls.Split("\n")[0]" alt="">
+                                        </a>
+                                        <div class="flex items-center">
+                                            <div>
+                                                <p class="font-medium">@review.Listing.Name</p>
+                                                <p class="text-sm text-neutral-500"> Điểm đánh giá : @review.Overall</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-5">
+                                        <div class="text-sm lg:pl-10 pl-5">
+                                            <div class="flex gap-2">
+                                                <button @onclick="() => NavLink(review.User.Id)">
+                                                    <img class="w-[40px] h-[40px] rounded-full" src="@(review.User.AvatarUrl != "" ? review.User.AvatarUrl : "https://static.dayladau.com/home/public/assets/img/no_profile.17dcba4.png")" alt="">
+                                                </button>
+                                                <div>
+                                                    <p>@review.User.Fullname</p>
+                                                    <p class="text-xs text-neutral-400">@(Common.DatetimeToString(review.User.CreatedAt.ToDateTime()))</p>
+                                                    <p class="py-2">@review.Comment</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="tab-host @Host">
+                            @foreach (var comment in Users.GohomeUserReview)
+                            {
+                                <div>
+                                    <div class="flex gap-3">
+                                        <a href="/detail-rooms/@comment.Listing.Id">
+                                            <img class="h-[70px] w-[120px] object-cover rounded-md overflow-hidden"
+                                                 src="@comment.Listing.ThumbnailUrls.Split("\n")[0]" alt="">
+                                        </a>
+                                        <div class="flex items-center">
+                                            <div>
+                                                <p class="font-medium">@comment.Listing.Name</p>
+                                                <p class="text-sm text-neutral-500"> Điểm đánh giá : @comment.Overall</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="py-5">
+                                        <p>@comment.Comment</p>
+                                        <p class="text-sm text-neutral-500 float-right">@(Common.DatetimeToString(Common.JavaTimeStampToDateTime(@comment.CreatedAt??0)))</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    @* page *@
+                    @if (Users.GohomeUser.IsHost)
+                    {
+                        <div>
+                            <button @onclick="Prev" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                Previous
+                            </button>
+                            <button @onclick="Next" class="inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                Next
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>   
+}
+
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    [Parameter]
+    public long? Id { get; set; }
+
+    private string? AvatarUrl { get; set; }
+    private string? CreatAt { get; set; }
+
+    private int Records { get; set; } = 10;
+    private int PageIndex { get; set; } = 1;
+    
+    private UserModelResponse? Users { get; set; }
+    private ReviewsByListingModelNewResponse? Data  { get; set; } 
+    private List<GohomeUserReviewProfile> HostReview { get; set; } = new List<GohomeUserReviewProfile>();
+    private IEnumerable<ListingModel> ListRoomsByHost { get; set; } = new List<ListingModel>();
+
+    #region Css Btn Tab
+        private string Guest { get; set; } = "";
+        private string Host { get; set; } = "";
+        private string CssBtnGuest { get; set; } = "text-blue-600 border-b-2 border-blue-600";
+        private string CssBtnHost { get; set; } = "border-transparent hover:text-gray-600 hover:border-gray-300";
+    #endregion
+
+    protected override async Task OnInitializedAsync()
+    {
+        Users = await Api.GetIns().ProfilePageNewApi.GetUserByIdNewAsync(Id);
+        
+        Data = await Api.GetIns().ProfilePageNewApi.GetReviewsForHostNewAsync(Id,Records,PageIndex);
+        HostReview = Data.UserReviews.ToList();
+
+        ListRoomsByHost = await Api.GetIns().ProfilePageNewApi.GetListingByUserIdNewAsync(Id);
+        
+        if (Users != null)
+        {
+            AvatarUrl=  String.IsNullOrEmpty(Users.GohomeUser.AvatarUrl) ? "https://static.dayladau.com/home/public/assets/img/no_profile.17dcba4.png":Users.GohomeUser.AvatarUrl;
+            CreatAt = Common.DatetimeToString(Common.JavaTimeStampToDateTime(Users.GohomeUser.CreatedAt??0));
+            @if (Users.GohomeUser.IsHost)
+            {
+                Guest = "";
+                Host = "hidden";
+            }
+            else
+            {
+                Guest = "hidden";
+                Host = "";
+            }
+        }
+        
+        await InvokeAsync(()=> StateHasChanged());
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.slickSlider");
+    }
+
+    private async Task LoadPage()
+    {
+        Data = await Api.GetIns().ProfilePageNewApi.GetReviewsForHostNewAsync(Id,Records,PageIndex);
+        HostReview = Data.UserReviews.ToList();
+    }
+
+    #region clicl button tab
+        private void ClickTabGuest()
+        {
+            Guest = "";
+            Host = "hidden";
+            CssBtnGuest = "text-blue-600 border-b-2 border-blue-600";
+            CssBtnHost = "border-transparent hover:text-gray-600 hover:border-gray-300";
+        }
+        private void ClickTabHost()
+        {
+            Guest = "hidden";
+            Host = "";
+            CssBtnGuest = "border-transparent hover:text-gray-600 hover:border-gray-300";
+            CssBtnHost = "text-blue-600 border-b-2 border-blue-600";
+        }    
+    #endregion
+
+    private async Task Prev()
+    {
+        PageIndex--;
+        if (PageIndex < 0)
+        {
+            PageIndex = 1;
+        }
+        await  LoadPage();
+    }
+    private async Task Next()
+    {
+        if (PageIndex < Data?.Pageing.TotalPages)
+        {
+            PageIndex++;
+        }
+        await  LoadPage();
+    }
+
+    private void NavLink(long Id)
+    {
+        NavigationManager.NavigateTo("/user/" + Id,true);
+    }
+
+}
+

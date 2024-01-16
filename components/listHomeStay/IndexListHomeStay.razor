@@ -1,0 +1,119 @@
+@using HotelApiV56.Model
+@using GoStay.Peter
+@using GoStay.Seli.srcComponent
+@using Newtonsoft.Json
+@using Filter = GoStay.Seli.components.Filter
+@inject IJSRuntime JsRuntime
+@inject Flowbie Flowbie
+
+<div class="bg-[url('images/imgHomePage/bgBody.png')] font-sans">
+    <header class=" pb-3 bg-[url('images/imgHomePage/bgBody.png')]">
+        <div class="w-full h-[100px] lg:h-[172px] bg-[url('images/imgHomePage/navListHome.png')] bg-no-repeat bg-cover">
+            <div class="grid content-center h-[85px] shadow-sm font-sans">
+                <div class="container mx-auto px-12">
+                    <LayoutLogin></LayoutLogin>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="lg:-mt-14 -mt-5 sticky top-0 z-30">
+        <FormSearch SearchText="@SearchText"></FormSearch>
+    </div>
+    @* <div class="container mx-auto xl:px-14 px-5 mt-8 text-[#424F64]"> *@
+    @*     <div class="md:flex hidden justify-between"> *@
+    @*         <div> *@
+    @*             <div class="flex xl:gap-24 lg:gap-14 gap-5 xl:text-xl lg:text-md text-sm font-medium tracking-widest"> *@
+    @*                 <button>YÊU THÍCH</button> *@
+    @*                 <button>LUXURY</button> *@
+    @*                 <button>DU LỊCH</button> *@
+    @*                 <button>HOME STAY</button> *@
+    @*                 <button>CAMPING</button> *@
+    @*                 <button>NỔI BẬT</button> *@
+    @*                 <button>GẦN ĐÂY</button> *@
+    @*             </div> *@
+    @*             <hr class="border-1 border-[#011f59] mt-3"> *@
+    @*         </div> *@
+    @*         <div class="flex gap-4 px-5 py-2 rounded-full border border-[#A4AFC3]"> *@
+    @*             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"> *@
+    @*                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"/> *@
+    @*             </svg> *@
+    @*             <p class="text-base">Bộ lọc</p> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+
+    <Filter SearchData="RequestDataFilter"></Filter>
+    <section class="container flex flex-col gap-5 mx-auto xl:px-14 px-5 xl:py-10 py-0 text-[#FF0F00]">
+        <LayourGrid Listings="Listings"></LayourGrid>
+    </section>
+    <footer>
+        <Footer></Footer>
+    </footer>
+</div>
+
+<NugetComponent ComponentName=@NalaComponentName.AddFavoritesPopup PackageName=@PackageName.Nala></NugetComponent> 
+
+
+@code{
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+    private int _heightScroll = 125;
+    
+    [Parameter]
+    public string? SearchData { get; set; }
+    
+    private string? SearchText { get; set; }
+    
+    private GetAllListingRequest RequestDataFilter { get; set; } = new ();
+    
+    private ListingzResponseIEnumerableBaseResponse? Response { get; set; }
+    
+    private GetAllListingRequest RequestData { get; set; } = new ();
+    
+    private List<ListingzResponse>? Listings { get; set; }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+        var result = JsonConvert.DeserializeObject<GetAllListingRequest>(SearchData);
+        Console.WriteLine(result);
+        SearchText = result?.Province;
+        RequestDataFilter.Bathrooms = result?.Bathrooms;
+        RequestDataFilter.Bedrooms = result?.Bedrooms;
+        RequestDataFilter.Beds = result?.Beds;
+        RequestDataFilter.RoomType = result?.RoomType;
+        RequestDataFilter.Amenities = result?.Amenities;
+        RequestDataFilter.PriceFrom = result?.PriceFrom;
+        RequestDataFilter.PriceTo = result?.PriceTo;
+        
+        RequestData.Province = result?.Province;
+        RequestData.Records = result?.Records;
+        RequestData.Page = result?.Page;
+        RequestData.StartTime = result?.StartTime;
+        RequestData.EndTime = result?.EndTime;
+        RequestData.NumberOfGuests = result?.NumberOfGuests;
+        RequestData.Bathrooms = result?.Bathrooms;
+        RequestData.Bedrooms = result?.Bedrooms;
+        RequestData.Beds = result?.Beds;
+        RequestData.RoomType = result?.RoomType;       
+        RequestData.Amenities = result?.Amenities;
+        RequestData.PriceFrom = result?.PriceFrom;
+        RequestData.PriceTo = result?.PriceTo;
+
+        
+        Response = await Api.GetIns().ListingzsPageApi.GetListingzsAsync(RequestData);
+        Listings = Response.Data.ToList();
+        StateHasChanged();
+    }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.scrollFormSearch",_heightScroll);
+        Flowbie.initModal();  
+    }
+
+}

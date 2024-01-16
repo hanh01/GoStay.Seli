@@ -1,0 +1,168 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows,browser
+build_property.RootNamespace = GoStay.Seli
+build_property.RootNamespace = GoStay.Seli
+build_property.ProjectDir = /Volumes/Data/GofaStay/GoStay/GoStay.Seli/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Volumes/Data/GofaStay/GoStay/GoStay.Seli
+build_property._RazorSourceGeneratorDebug = 
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/ColumnLeft.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9Db2x1bW5MZWZ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-tmqadsvjoj
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/ColumnRight.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9Db2x1bW5SaWdodC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-w5xc4hz7jg
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/Evaluation.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9FdmFsdWF0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-772m1f2vk1
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/HeadPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9IZWFkUGFnZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-9ngfi1dh9i
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/IndexDetailRooms.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9JbmRleERldGFpbFJvb21zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-fkxqgir8f0
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/InfoHost.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9JbmZvSG9zdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-wy3vhp73nz
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/ListRooms.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9MaXN0Um9vbXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-g44xb9m5jo
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/RecentLocation.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9SZWNlbnRMb2NhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-3eii1lqg2m
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/Regulations.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9SZWd1bGF0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-rbem8mgghz
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/SlideShowImg.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9TbGlkZVNob3dJbWcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-c0b4r5ydmj
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/UserComment.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9Vc2VyQ29tbWVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-h66yelmy16
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/detailHomeStay/ViewAllImage.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9kZXRhaWxIb21lU3RheS9WaWV3QWxsSW1hZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1d3h9hgdxb
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Filter.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9GaWx0ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-drn5yg8csi
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9Gb290ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-87ksmkeygx
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/FormOption.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9Gb3JtT3B0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-i2evwrrb6u
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/FormSearch.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9Gb3JtU2VhcmNoLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-pc2eiwryyi
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/FeaturedHotels.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9GZWF0dXJlZEhvdGVscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-n8j4ye1bqo
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/HeaderPage.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9IZWFkZXJQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-bol6fzg2ss
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/IndexHomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9JbmRleEhvbWVQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-8fwutxpdo6
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/ItemListTop.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9JdGVtTGlzdFRvcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-kyykwgf16a
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/Promotions.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9Qcm9tb3Rpb25zLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-9nyxmg8rp1
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/SlideImageHP.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9TbGlkZUltYWdlSFAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-r8atmu5gm7
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/SliderHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9TbGlkZXJIZWFkZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-v5uc7quiyw
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/homePage/SpecialOffer.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9ob21lUGFnZS9TcGVjaWFsT2ZmZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-7omodlydwg
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/LayoutLoadingImg.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9MYXlvdXRMb2FkaW5nSW1nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-srhqmce5ze
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/LayoutLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9MYXlvdXRMb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-w29cpty93b
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/listHomeStay/IndexListHomeStay.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9saXN0SG9tZVN0YXkvSW5kZXhMaXN0SG9tZVN0YXkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-v8g93sq87o
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/listHomeStay/LayourGrid.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9saXN0SG9tZVN0YXkvTGF5b3VyR3JpZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-fdmryyipd5
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/listHomeStay/SlideImg.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9saXN0SG9tZVN0YXkvU2xpZGVJbWcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-w1q1ev8a97
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Map.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9NYXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-pelk1jiz16
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/NavBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9OYXZCYXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-0ch8jvw7nx
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/profilePage/UserById.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9wcm9maWxlUGFnZS9Vc2VyQnlJZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-zsq1kpqijv
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Test.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9UZXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-76s4ei4bcu
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Timepicker/DatePicker.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9UaW1lcGlja2VyL0RhdGVQaWNrZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-1rjfldep9g
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Timepicker/DatePickerByDay.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9UaW1lcGlja2VyL0RhdGVQaWNrZXJCeURheS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-0nzlyfnbql
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Timepicker/DatePickerByHour.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9UaW1lcGlja2VyL0RhdGVQaWNrZXJCeUhvdXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-fc05bcvkqf
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/components/Timepicker/DatePickerByNight.razor]
+build_metadata.AdditionalFiles.TargetPath = Y29tcG9uZW50cy9UaW1lcGlja2VyL0RhdGVQaWNrZXJCeU5pZ2h0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-xbb82d8wcq
+
+[/Volumes/Data/GofaStay/GoStay/GoStay.Seli/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-fy5mm53x8d

@@ -1,0 +1,17 @@
+@using GoStay.Peter
+@inject Flowbie IFlowbie
+
+<div class="grid place-items-center">
+  <p>bshdsakdafghjdagjdkgjfhguhrgjdfuh</p>
+  <div>safdsfds</div>
+  <button class="p-2 bg-[#898989]">Hello</button>
+</div>
+
+
+@code {
+  protected override void OnAfterRender(bool firstRender)
+  {
+    IFlowbie.initDropdown();
+    base.OnAfterRender(firstRender);
+  }
+}

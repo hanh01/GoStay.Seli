@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>GoStay.Seli</id>
+    <version>1.0.0-rc-3</version>
+    <authors>Seli</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Microsoft.AspNetCore.Components.Web" version="6.0.8" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/net6.0/nuget.config" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/bin/Release/net6.0/Seli.dll" target="lib/net6.0/Seli.dll" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/obj/Release/net6.0/staticwebassets/msbuild.GoStay.Seli.Microsoft.AspNetCore.StaticWebAssets.props" target="build/Microsoft.AspNetCore.StaticWebAssets.props" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/obj/Release/net6.0/staticwebassets/msbuild.build.GoStay.Seli.props" target="build/GoStay.Seli.props" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/obj/Release/net6.0/staticwebassets/msbuild.buildMultiTargeting.GoStay.Seli.props" target="buildMultiTargeting/GoStay.Seli.props" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/obj/Release/net6.0/staticwebassets/msbuild.buildTransitive.GoStay.Seli.props" target="buildTransitive/GoStay.Seli.props" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/background.png" target="staticwebassets/background.png" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/css/style.css" target="staticwebassets/css/style.css" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/exampleJsInterop.js" target="staticwebassets/exampleJsInterop.js" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/js/script.js" target="staticwebassets/js/script.js" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/nuget.config" target="content/nuget.config" />
+    <file src="/Volumes/Data/GofaStay/GoStay/Seli/nuget.config" target="contentFiles/any/net6.0/nuget.config" />
+  </files>
+</package>

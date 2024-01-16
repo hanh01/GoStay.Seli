@@ -1,0 +1,508 @@
+@using HotelApiV56.Model
+@using GoStay.Peter
+@using Newtonsoft.Json
+@using System.Linq.Expressions
+@using GoStay.Seli.srcComponent
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavigationManager
+@inject Flowbie Flowbie
+
+<!-- Filters -->
+<div id="filters" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 p-4 w-full md:inset-0 h-modal md:h-full">
+
+    <div class="relative w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class=" p-4 rounded-t border-b dark:border-gray-600">
+                <button type="button" class="float-right right-3 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-py-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="filters">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="grid place-items-center text-xl font-semibold text-[#424F64] dark:text-white">
+                    <p class="text-center">Bộ lọc</p>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6 text-[#424F64] h-[80vh] overflow-y-auto">
+                <div class="flex flex-col gap-3 ">
+                    <!-- Loại phòng -->
+                    <div>
+                        <p class="text-xl font-semibold">Loại phòng</p>
+                        <div class="px-5 flex flex-col pt-2 gap-2.5">
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="">Nhà riêng</div>
+                                        <div class="text-zinc-500">Nhà trong khu dân cư</div>
+                                    </div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxClicked("house",  eventArgs.Value))" checked="@ListRoomType.Contains("house")" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="">Căn hộ chung cư</div>
+                                        <div class="text-zinc-500">Căn hộ trong tòa nhà hoặc khu chung cư có thang máy</div>
+                                    </div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxClicked("condo", eventArgs.Value))" checked="@ListRoomType.Contains("condo")" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="">Villa</div>
+                                        <div class="text-zinc-500">Căn biệt thự không gian rộng và biệt lập</div>
+                                    </div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxClicked("villa", eventArgs.Value))" checked="@ListRoomType.Contains("villa")" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="">Resort</div>
+                                        <div class="text-zinc-500">Quần thể xây dựng chuyên biệt nhằm mục đích đón khách</div>
+                                    </div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxClicked("resort", eventArgs.Value))" checked="@ListRoomType.Contains("resort")" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="">Khu cắm trại</div>
+                                        <div class="text-zinc-500">Khu vực có diện tích ngoài trời rộng, vườn cây, sân bãi</div>
+                                    </div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxClicked("camping", eventArgs.Value))" checked="@ListRoomType.Contains("camping")" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div>
+                                        <div class="">Nhà trên cây</div>
+                                        <div class="text-zinc-500">Nhà được gia cố trên cây hoặc rừng tự nhiên</div>
+                                    </div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxClicked("treehouse", eventArgs.Value))" checked="@ListRoomType.Contains("treehouse")" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Giá phòng -->
+                    <div>
+                        <p class="text-xl font-semibold">Giá phòng</p>
+                        <div class="px-5 grid grid-cols-4 py-1.5">
+                            <button type="button" @onclick="@(() => Price("Tất cả"))" class="col-span-1 py-2 rounded-l-lg border-y border-l border-[#346A8F] hover:bg-[#346A8F] hover:text-white @CssBtnPrice1">
+                                <p>Tất cả</p>
+                            </button>
+                            <button type="button" @onclick="@(() => Price("Dưới 600K"))" class="col-span-1 py-2 border-y border-l border-[#346A8F] hover:bg-[#346A8F] hover:text-white @CssBtnPrice2">
+                                <p>Dưới 600K</p>
+                            </button>
+                            <button type="button" @onclick="@(() => Price("Dưới 1M"))" class="col-span-1 py-2 border-y border-l border-[#346A8F] hover:bg-[#346A8F] hover:text-white @CssBtnPrice3">
+                                <p>Dưới 1M</p>
+                            </button>
+                            <button type="button" @onclick="@(() => Price("Trên 1M"))" class="col-span-1 py-2 rounded-r-lg border border-[#346A8F] hover:bg-[#346A8F] hover:text-white @CssBtnPrice4">
+                                <p>Trên 1M</p>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Phòng và giường -->
+                    <div>
+                        <p class="text-xl font-semibold">Phòng và giường</p>
+                        <div class="px-5 flex flex-col pt-2 gap-2.5">
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="grid content-center"><p>Giường</p></div>
+                                    <div class="grid grid-cols-3 content-center py-1.5 border border-gray-300 rounded-md">
+                                        <button class="col-span-1 px-2" onclick=@(()=> UnIncrementCount("bed"))>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+                                            </svg>
+                                        </button>
+                                        <p class="col-span-1 text-lg text-center">@CountBed</p>
+                                        <button class="col-span-1 px-2" onclick=@(()=> IncrementCount("bed"))>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="grid content-center"><p>Phòng ngủ</p></div>
+                                    <div class="grid grid-cols-3 content-center py-1.5 border border-gray-300 rounded-md">
+                                        <button class="col-span-1 px-2" onclick=@(()=> UnIncrementCount("bedroom"))>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+                                            </svg>
+                                        </button>
+                                        <p class="col-span-1 text-lg text-center">@CountBedRoom</p>
+                                        <button class="col-span-1 px-2" onclick=@(()=> IncrementCount("bedroom"))>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="grid content-center"><p>Phòng tắm</p></div>
+                                    <div class="grid grid-cols-3 content-center py-1.5 border border-gray-300 rounded-md">
+                                        <button class="col-span-1 px-2" onclick=@(()=> UnIncrementCount("bathroom"))>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
+                                            </svg>
+                                        </button>
+                                        <p class="col-span-1 text-lg text-center">@CountBathroom</p>
+                                        <button class="col-span-1 px-2" onclick=@(()=> IncrementCount("bathroom"))>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tiện nghi -->
+                    <div>
+                        <p class="text-xl font-semibold">Tiện nghi</p>
+                        <div class="px-5 flex flex-col pt-2 gap-2.5">
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="">@ItemNetflix?.Label</div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxAmenities(ItemNetflix.Name, eventArgs.Value))" checked="@ListAmenities.Contains(ItemNetflix.Name)" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="">@ItemHotTub?.Label</div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxAmenities(ItemHotTub.Name, eventArgs.Value))" checked="@ListAmenities.Contains(ItemHotTub.Name)" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="">@ItemWorkDesk?.Label</div>
+                                    <input type="checkbox" @onchange="@((eventArgs) => CheckboxAmenities(ItemWorkDesk.Name, eventArgs.Value))" checked="@ListAmenities.Contains(ItemWorkDesk.Name)" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cơ sở vật chất -->
+                    <div>
+                        <p class="text-xl font-semibold">Cơ sở vật chất</p>
+                        <div class="px-5 flex flex-col pt-2 gap-2.5">
+                            @foreach (var item in  ListItemsAmenities)
+                            {
+                                <div class="">
+                                    <div class="flex justify-between">
+                                        <div class="">@item.Label</div>
+                                        <input type="checkbox" @onchange="@((eventArgs) => CheckboxAmenities(item.Name, eventArgs.Value))" checked="@ListAmenities.Contains(item.Name)" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]">
+                                    </div>
+                                </div>  
+                            }
+
+                            @* <div class=""> *@
+                            @*     <div class="flex justify-between"> *@
+                            @*         <div class="">Miễn phí đỗ xe oto</div> *@
+                            @*         <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*     </div> *@
+                            @* </div>   *@
+                            @* <div class=""> *@
+                            @*     <div class="flex justify-between"> *@
+                            @*         <div class="">Miễn phí đỗ xe máy</div> *@
+                            @*         <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*     </div> *@
+                            @* </div> *@
+                            @* <div class=""> *@
+                            @*     <div class="flex justify-between"> *@
+                            @*         <div class="">Bể bơi</div> *@
+                            @*         <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*     </div> *@
+                            @* </div> *@
+                            @* <div class=""> *@
+                            @*     <div class="flex justify-between"> *@
+                            @*         <div class="">Máy giặt</div> *@
+                            @*         <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*     </div> *@
+                            @* </div> *@
+                            @* <div id="dots"></div> *@
+                            @* <div class="hidden flex flex-col gap-2.5" id="more"> *@
+                            @*     <div class=""> *@
+                            @*         <div class="flex justify-between"> *@
+                            @*             <div class="">Thang máy</div> *@
+                            @*             <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @*     <div class=""> *@
+                            @*         <div class="flex justify-between"> *@
+                            @*             <div class="">Phòng gym</div> *@
+                            @*             <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @*     <div class=""> *@
+                            @*         <div class="flex justify-between"> *@
+                            @*             <div class="">Chỗ để xe có phí</div> *@
+                            @*             <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @*     <div class=""> *@
+                            @*         <div class="flex justify-between"> *@
+                            @*             <div class="">Ban công</div> *@
+                            @*             <input type="checkbox" class="w-6 h-6 rounded-md border-2 border-[#B7B7B7] focus:ring-0 text-[#346A8F]"> *@
+                            @*         </div> *@
+                            @*     </div> *@
+                            @* </div> *@
+                            @* *@
+                            @* <p id="button" type="button" @onclick="async() => await ToggleText()" class="cursor-pointer font-semibold text-sm underline underline-offset-2">Hiển thị thêm cơ sở vật chất</p> *@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex justify-between items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button data-modal-toggle="filters" type="button" class="text-gray-500 bg-white hover:bg-gray-100 rounded-full border border-gray-200 text-sm font-medium px-5 py-2 hover:text-gray-900 focus:z-10 ">Xoá</button>
+                <button @onclick="FilterResults" data-modal-toggle="filters" type="button" 
+                        class="text-white bg-[#346A8F] hover:bg-white hover:text-[#346A8F] border border-[#346A8F] font-medium rounded-full text-sm px-5 py-2 text-center">Áp dụng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Task<IJSObjectReference>? _module;
+    const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    [Parameter]
+    public GetAllListingRequest? SearchData { get; set; }
+
+    private GetAllListingRequest? RequestDataFilter { get; set; } = new();
+    
+    private List<Item>? ListItemsAmenities { get; set; }
+    
+    private Item? ItemNetflix { get; set; }
+    private Item? ItemHotTub { get; set; }
+    private Item? ItemWorkDesk{ get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (SearchData?.Bathrooms != null && SearchData?.Bedrooms != null && SearchData?.Beds != null && SearchData?.RoomType != null && SearchData?.Amenities != null )
+        {
+            CountBathroom = SearchData?.Bathrooms;
+            CountBedRoom = SearchData?.Bedrooms;
+            CountBed = SearchData?.Beds;
+            ListRoomType = SearchData?.RoomType.Split("+").ToList();
+            ListAmenities = SearchData?.Amenities.Split("+").ToList();
+        }
+
+        if (SearchData != null)
+        {
+            if (SearchData.PriceFrom >= 0 && SearchData.PriceTo <= 600000)
+            {
+                Price("Dưới 600K");
+            }
+            else if (SearchData.PriceFrom >= 0 && SearchData.PriceTo <= 1000000)
+            {
+                Price("Dưới 1M");
+            }
+            else if (SearchData.PriceFrom == null && SearchData.PriceTo == null)
+            {
+                Price("Tất cả");
+            }
+            else
+            {
+                Price("Trên 1M");
+            }
+        }
+        else
+        {
+            Price("Tất cả");
+        }
+
+        
+        ListItemsAmenities = Common.LoggerFilterOptions().List[6].Items;
+        ItemNetflix = Common.LoggerFilterOptions().List[1].Items[1];
+        ItemHotTub = Common.LoggerFilterOptions().List[2].Items[2];
+        ItemWorkDesk = Common.LoggerFilterOptions().List[5].Items[1];
+        
+        StateHasChanged();
+    }
+    
+    private void FilterResults()
+    {
+        RoomType = "";
+        foreach (var item in ListRoomType)
+        {
+            RoomType = (RoomType == "") ? item : (RoomType + "+" + item);
+        }
+        Amenities = "";
+        foreach (var item in ListAmenities)
+        {
+            Amenities = (Amenities == "") ? item : (Amenities + "+" + item);
+        }
+
+        RequestDataFilter.Bathrooms = CountBathroom;
+        RequestDataFilter.Bedrooms = CountBedRoom;
+        RequestDataFilter.Beds = CountBed;
+        RequestDataFilter.RoomType = RoomType;
+        RequestDataFilter.PriceFrom = PriceFrom;
+        RequestDataFilter.PriceTo = PriceTo;
+        RequestDataFilter.Amenities = Amenities;
+
+        Flowbie.setDataModalResult("filters", RequestDataFilter.ToJson());
+
+        StateHasChanged();
+    // Console.WriteLine(RequestDataFilter);
+
+    }
+    
+    #region Loại phòng
+    
+    private string RoomType { get; set; } = "";
+    private List<string> ListRoomType { get; set; } = new();
+        
+    private void CheckboxClicked(string type, object checkedValue)
+    {
+        if ((bool) checkedValue)
+        {
+            if (!ListRoomType.Contains(type))
+            {
+                ListRoomType.Add(type);
+            }
+        }
+        else
+        {
+            if (ListRoomType.Contains(type))
+            {
+                ListRoomType.Remove(type);
+            }
+        }
+    }
+    
+    #endregion
+    
+    #region IncrementCount and UnIncrementCount
+
+    private int? CountBedRoom { get; set; } = 0;
+    private int? CountBathroom { get; set; } = 0;
+    private int? CountBed { get; set; } = 0;
+
+    private void IncrementCount(string value)
+    {
+        if (value == "bed")
+        {
+            CountBed++;
+        }
+        else if (value == "bedroom")
+        {
+            CountBedRoom++;
+        }
+        else
+        {
+            CountBathroom++;
+        }
+    }
+
+    private void UnIncrementCount(string value)
+    {
+        if (value == "bed")
+        {
+            CountBed = (CountBed > 0 ? CountBed - 1 : CountBed = 0);
+        }
+        else if (value == "bedroom")
+        {
+            CountBedRoom = (CountBedRoom > 0 ? CountBedRoom - 1 : CountBedRoom = 0);
+        }
+        else
+        {
+            CountBathroom = (CountBathroom > 0 ? CountBathroom - 1 : CountBathroom = 0);
+        }
+    }
+
+    #endregion
+    
+    #region Giá phòng
+
+        private int? PriceFrom { get; set; }
+        private int? PriceTo { get; set; }
+        private string? CssBtnPrice1 { get; set; } = "";
+        private string? CssBtnPrice2 { get; set; } = "";
+        private string? CssBtnPrice3 { get; set; } = "";
+        private string? CssBtnPrice4 { get; set; } = "";
+        private void Price(string value)
+        {
+            switch (value)
+            {
+                case "Tất cả" :
+                    PriceFrom = null;
+                    PriceTo = null;
+                    CssBtnPrice1 = "bg-[#346A8F] text-white";
+                    CssBtnPrice2 = "";
+                    CssBtnPrice3 = "";
+                    CssBtnPrice4 = "";
+                    break;
+                case "Dưới 600K" :
+                    PriceFrom = 0;
+                    PriceTo = 600000;
+                    CssBtnPrice2 = "bg-[#346A8F] text-white";
+                    CssBtnPrice3 = "";
+                    CssBtnPrice4 = "";
+                    CssBtnPrice1 = "";
+                    break;
+                case "Dưới 1M" :
+                    PriceFrom = 0;
+                    PriceTo = 1000000;
+                    CssBtnPrice3 = "bg-[#346A8F] text-white";
+                    CssBtnPrice4 = "";
+                    CssBtnPrice2 = "";
+                    CssBtnPrice1 = "";
+                    break;
+                case "Trên 1M" :
+                    PriceFrom = 1000000;
+                    CssBtnPrice4 = "bg-[#346A8F] text-white";
+                    CssBtnPrice3 = "";
+                    CssBtnPrice2 = "";
+                    CssBtnPrice1 = "";
+                    break;
+                    default:break;
+            }
+        }
+
+    #endregion
+
+    #region Tiện nghi
+
+    private string Amenities { get; set; } = "";
+    private List<string> ListAmenities { get; set; } = new();
+        
+    private void CheckboxAmenities(string type, object checkedValue)
+    {
+        if ((bool) checkedValue)
+        {
+            if (!ListAmenities.Contains(type))
+            {
+                ListAmenities.Add(type);
+            }
+        }
+        else
+        {
+            if (ListAmenities.Contains(type))
+            {
+                ListAmenities.Remove(type);
+            }
+        }
+    }
+
+    #endregion
+    
+    private async Task ToggleText()
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.toggleText");
+    }
+
+}

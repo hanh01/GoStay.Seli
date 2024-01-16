@@ -1,0 +1,146 @@
+@using HotelApiV56.Model
+@using GoStay.Seli.srcComponent
+@using System.Collections.ObjectModel
+
+<section class="text-[#424F64]">
+    <div class="bg-white rounded-md overflow-hidden shadow-md">
+        <div class="grid lg:grid-cols-6 grid-cols-1 gap-4">
+            <div class="grid-cols-1 text-xl font-bold">
+                <div class="w-full h-2.5 bg-red-500"></div>
+                <p class="py-4 pl-5">DANH SÁCH PHÒNG</p>
+            </div>
+        </div>
+    </div>
+    @foreach (var room in ListRoomInDetail)
+    {
+        <div class="mt-5">
+            <div class="flex justify-between tracking-wide mb-3">
+                <div class="w-[200px] text-xl font-bold ">@room.Name</div>
+                <div class="sm:grid hidden content-end w-full mb-2">
+                    <hr class="border-[#A0A4B8]"/>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                <div class="overflow-hidden">
+                    <div class="md:grid hidden  lg:h-[310px] h-[250px]">
+                        <div class="grid grid-cols-3 gap-4">
+                            @for (int i = 0; i < room.PictureUrls.Split("\n").Length; i++)
+                            {
+                                <img src="@room.PictureUrls.Split("\n")[i]" alt="">
+                                @if (i >= 2)
+                                {
+                                    break;
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="md:hidden flex h-[180px]">
+                        <div class="grid grid-cols-2 gap-2">
+                            @for (int i = 0; i < room.PictureUrls.Split("\n").Length; i++)
+                            {
+                                <img src="@room.PictureUrls.Split("\n")[i]" alt="">
+                                @if (i >= 1)
+                                {
+                                    break;
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="flex md:flex-row flex-col justify-between -mt-2 py-4 bg-white ">
+                    <div class="flex md:pl-10 pl-2 gap-4">
+                        <p class="font-bold leading-8">Giá phòng :</p>
+                        <div>
+                            <p class="md:text-xl text-base font-bold leading-8">@Common.ConvertMoney(room.PriceFirstHour ?? 0)</p>
+                            <p class="text-[#F19100] font-semibold md:text-xl text-base leading-8">giờ đầu tiên</p>
+                        </div>
+                    </div>
+                    <div class="flex items-end mb-2 md:pr-10 px-2">
+                        <button class="bg-[#DC3F34] text-white rounded-full w-full py-2 md:px-10 px-3">Đặt phòng ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @* <div class="mt-10"> *@
+    @*     <div class="flex justify-between tracking-wide mb-3"> *@
+    @*         <div class="w-[200px] text-xl font-bold ">Pink Loving</div> *@
+    @*         <div class="sm:grid hidden content-end w-full mb-2"> *@
+    @*             <hr class="border-[#A0A4B8]"/> *@
+    @*         </div> *@
+    @*     </div> *@
+    @*     <div class="bg-white rounded-lg overflow-hidden shadow-md"> *@
+    @*         <div class="bg-[url('images/imgHomePage/listRoom5.png')] h-[325px]"> *@
+    @*             <div class="md:grid hidden place-content-end h-[310px] pr-3"> *@
+    @*                 <div class="flex gap-4"> *@
+    @*                     <img src="_content/GoStay.Seli/images/imgHomePage/listRoom2.png" alt=""> *@
+    @*                     <img src="_content/GoStay.Seli/images/imgHomePage/listRoom3.png" alt=""> *@
+    @*                     <img src="_content/GoStay.Seli/images/imgHomePage/listRoom4.png" alt=""> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*         <div class="flex md:flex-row flex-col justify-between -mt-2 py-4 bg-white "> *@
+    @*             <div class="flex md:pl-10 pl-2 gap-4"> *@
+    @*                 <p class="font-bold leading-8">Giá phòng :</p> *@
+    @*                 <div> *@
+    @*                     <p class="md:text-xl text-base font-bold leading-8">450.000 VND <span class="text-sm text-[#A6A6A6] font-medium"> 450.000 VND</span></p> *@
+    @*                     <p class="text-[#F19100] font-semibold md:text-xl text-base leading-8">2 giờ đầu</p> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*             <div class="flex items-end mb-2 md:pr-10 px-2"> *@
+    @*                 <button class="bg-[#DC3F34] text-white rounded-full w-full py-2 md:px-10 px-3">Đặt phòng ngay</button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+    @* <div class="mt-10"> *@
+    @*     <div class="flex justify-between tracking-wide mb-3"> *@
+    @*         <div class="w-[200px] text-xl font-bold ">Classic Room</div> *@
+    @*         <div class="sm:grid hidden content-end w-full mb-2"> *@
+    @*             <hr class="border-[#A0A4B8]"/> *@
+    @*         </div> *@
+    @*     </div> *@
+    @*     <div class="bg-white rounded-lg overflow-hidden shadow-md"> *@
+    @*         <div class="bg-[url('images/imgHomePage/listRoom6.png')] h-[325px]"> *@
+    @*             <div class="md:grid hidden place-content-end h-[310px] pr-3"> *@
+    @*                 <div class="flex gap-4"> *@
+    @*                     <img src="_content/GoStay.Seli/images/imgHomePage/listRoom2.png" alt=""> *@
+    @*                     <img src="_content/GoStay.Seli/images/imgHomePage/listRoom3.png" alt=""> *@
+    @*                     <img src="_content/GoStay.Seli/images/imgHomePage/listRoom4.png" alt=""> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*         <div class="flex md:flex-row flex-col justify-between -mt-2 py-4 bg-white "> *@
+    @*             <div class="flex md:pl-10 pl-2 gap-4"> *@
+    @*                 <p class="font-bold leading-8">Giá phòng :</p> *@
+    @*                 <div> *@
+    @*                     <p class="md:text-xl text-base font-bold leading-8">450.000 VND <span class="text-sm text-[#A6A6A6] font-medium"> 450.000 VND</span></p> *@
+    @*                     <p class="text-[#F19100] font-semibold md:text-xl text-base leading-8">2 giờ đầu</p> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*             <div class="flex items-end mb-2 md:pr-10 px-2"> *@
+    @*                 <button class="bg-[#DC3F34] text-white rounded-full w-full py-2 md:px-10 px-3">Đặt phòng ngay</button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+    <div class="flex justify-center items-center my-5">
+        <button class="bg-white border border-[#9BB5C4] py-2 px-5 text-[#9BB5C4] rounded-md">Xem thêm</button>
+    </div>
+</section>
+
+@code {
+
+    [Parameter]
+    public GohomeListingDetailForCus Data { get; set; }
+
+    private Collection<GohomeRoomDetailCus> ListRoomInDetail { get; set; } = new Collection<GohomeRoomDetailCus>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListRoomInDetail = await Api.GetIns().ListingNewDetailPageApi.GetRoomsByListingIDAsync(Data.Id);
+        StateHasChanged();
+    }
+
+}

@@ -1,0 +1,79 @@
+@using GoStay.Peter
+@using GoStay.Peter.Models.ListingDetail
+@using HotelApiV56.Api
+@using HotelApiV56.Model
+@inject Flowbie Flowbie
+@inject IJSRuntime JsRuntime
+
+
+<div id="view-all-image" class="hidden fixed top-0 right-0 left-0 z-50 w-full ">
+      <div class="bg-white w-full ">
+          <div class="sticky top-0 bg-white">
+              <div class="py-3 pl-5">
+                  <button type="button" @onclick="ShowScroll" data-modal-toggle="view-all-image" class="inline-block text-black hover:bg-gray-200 p-2 rounded-full ">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                           stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
+                      </svg>
+                  </button>
+              </div>
+          </div>
+          <div class="w-full h-[100vh] overflow-y-auto pb-32">
+              <div class="container mx-auto grid grid-flow-row grid-cols-2 gap-2 max-w-3xl md:px-0 px-10">
+                  <div class="flex flex-col gap-y-2">
+                      @for (int i = 0; i < PictureUrls.Length; i++)
+                      {
+                          @if (i % 2 == 0)
+                          {
+                              <button type="button" data-modal-toggle="modelSlider"  data-modal-data="@i" class="relative overflow-hidden">
+                                  <img src="@PictureUrls[i]"
+                                       class="w-full hover:scale-105 transition duration-300 ease-in-out" alt="...">
+                              </button>
+                          }
+                      }
+                  </div>
+                  <div class="flex flex-col gap-y-2">
+                      @for (int i = 0; i < PictureUrls.Length; i++)
+                      {
+                          @if (i % 2 != 0)
+                          {
+                              <button type="button" data-modal-toggle="modelSlider" data-modal-data="@i" class="relative overflow-hidden">
+                                  <img src="@PictureUrls[i]"
+                                       class="w-full hover:scale-105 transition duration-300 ease-in-out" alt="...">
+                              </button>
+                          }
+                      }
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>        
+
+
+<SlideShowImg ImageUrls="PictureUrls"></SlideShowImg>
+
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    [Parameter]
+    public string[] PictureUrls { get; set; } = {};
+
+    string? ValueScroll { get; set; }
+    
+    private async void ShowScroll()
+    {
+        ValueScroll = "";
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.hideScroll",ValueScroll);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Flowbie.initModal();
+    }
+
+}

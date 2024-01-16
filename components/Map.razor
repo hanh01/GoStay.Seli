@@ -1,0 +1,28 @@
+@inject IJSRuntime JSRuntime
+
+<section>
+    <div class="flex justify-between tracking-wide">
+        <div class=" w-[120px] text-2xl font-bold ">BẢN ĐỒ</div>
+        <div class="sm:grid hidden content-end w-full mb-2">
+            <hr class="border-[#A0A4B8]"/>
+        </div>
+    </div>
+    
+    <div class="py-5 ">
+        <div id="map" class="w-full lg:h-[750px] h-[500px] rounded-xl overflow-hidden"></div>
+    </div>
+    
+</section>
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.initMap2");
+    }
+}

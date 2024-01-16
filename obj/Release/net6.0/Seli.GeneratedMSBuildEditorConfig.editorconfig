@@ -1,0 +1,40 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows,browser
+build_property.RootNamespace = Seli
+build_property.RootNamespace = Seli
+build_property.ProjectDir = /Volumes/Data/GofaStay/GoStay/Seli/
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Volumes/Data/GofaStay/GoStay/Seli
+build_property._RazorSourceGeneratorDebug = 
+
+[/Volumes/Data/GofaStay/GoStay/Seli/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/components/ExclusiveOffer.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9jb21wb25lbnRzL0V4Y2x1c2l2ZU9mZmVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/components/Footer.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9jb21wb25lbnRzL0Zvb3Rlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/components/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9jb21wb25lbnRzL0luZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/components/NavBar.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9jb21wb25lbnRzL05hdkJhci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Volumes/Data/GofaStay/GoStay/Seli/wwwroot/components/SliderHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdC9jb21wb25lbnRzL1NsaWRlckhlYWRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 

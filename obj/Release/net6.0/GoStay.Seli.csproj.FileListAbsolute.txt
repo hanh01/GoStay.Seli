@@ -1,0 +1,17 @@
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/bin/Release/net6.0/nuget.config
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/bin/Release/net6.0/GoStay.Seli.staticwebassets.runtime.json
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/bin/Release/net6.0/GoStay.Seli.deps.json
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/bin/Release/net6.0/GoStay.Seli.dll
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/bin/Release/net6.0/GoStay.Seli.pdb
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.csproj.AssemblyReference.cache
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.AssemblyInfoInputs.cache
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.AssemblyInfo.cs
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.csproj.CoreCompileInputs.cache
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/staticwebassets.build.json
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/staticwebassets.development.json
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/scopedcss/bundle/GoStay.Seli.styles.css
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.dll
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/refint/GoStay.Seli.dll
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/GoStay.Seli.pdb
+/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/Release/net6.0/ref/GoStay.Seli.dll

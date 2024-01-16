@@ -1,0 +1,194 @@
+@using GoStay.Peter
+@inject IJSRuntime JsRuntime
+
+@* mọi thắc mắc xin liên hệ @Peter Tran *@
+@* <button class="bg-blue-700 dark:bg-blue-600 dark:focus:ring-blue-800 dark:hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium hover:bg-blue-800 inline-flex items-center px-4 py-2.5 rounded-lg text-center text-sm text-white" id="dropdownDefault" @onclick="Toggle" type="button"> *@
+@* 	<div class="p-2">from: @Value.Item1</div> *@
+@* 	<div class="p-2">to: @Value.Item2</div> *@
+@* </button> *@
+
+
+<div class=" bg-white dark:bg-gray-700 grid  md:grid-cols-2 px-5 gap-4 rounded shadow w-[800px] z-10 pb-3">
+	<DatePicker @bind-Value="Value" Selected="OnSeSelected" Type="DatePicker.PickType.NONE"/>
+
+	<div class="flex flex-4 flex-col justify-between p-1 w-full">
+		<div class="mt-5">
+			<h6>Giờ nhận phòng:</h6>
+			@* iv class="flex"> *@
+   @*          				<button class="text-3xl">&lt;</button> *@
+   @*          				<div class="flex mx-2 overflow-x-auto "> *@
+   @*          					@foreach (var str in lstTimes) *@
+   @*          					{ *@
+   @*          						var cssSelected = SelecTime == str ? "rounded-sm bg-orange-200 text-orange-600" : ""; *@
+   @*          						<button class="@cssSelected hover:text-orange-400 px-4 font-semibold" @onclick="() => OnTimeClick(str)">@str</button> *@
+   @*          					} *@
+   @*          				</div> *@
+   @*          				<button class="text-3xl">&gt;</button> *@
+			@*          			</div><d *@
+			
+			<div class="relative w-full my-2">
+				<div class="slider-start-time-picker px-5 py-1.5">
+					@foreach (var str in lstTimes)
+					{
+						var cssSelected = SelecTime == str ? "rounded-sm bg-orange-200 text-orange-600" : "";
+						<button class="@cssSelected hover:text-orange-400 px-4 font-semibold" @onclick="() => OnTimeClick(str)">@str</button>
+					}
+				</div>
+				<button class="prev-time absolute left-0 top-0 text-2xl">&lt;</button> 
+				<button class="next-time absolute right-0 top-0 text-2xl">&gt;</button>
+			</div>
+			
+		</div>
+
+		<div class="mb-5">
+			<h6 class="">Số giờ sử dụng:</h6>
+			@* <div class="flex "> *@
+			@* 	<button class="text-3xl">&lt;</button> *@
+			@* 	<div class="flex mx-2 overflow-x-auto "> *@
+			@* 		@foreach (var str in lstHours) *@
+			@* 		{ *@
+			@* 			var cssSelected = SelecHour == str ? "rounded-sm bg-orange-200 text-orange-600" : ""; *@
+			@* 			<button class="@cssSelected hover:text-orange-400 px-4 font-semibold" @onclick="() => OnHourClick(str)">@str</button> *@
+			@* 		} *@
+			@* 	</div> *@
+			@* 	<button class="text-3xl">&gt;</button> *@
+			@* </div> *@
+			
+			<div class="relative w-full my-2">
+				<div class="slider-date-time-picker px-5 py-1.5">
+					@foreach (var str in lstHours)
+					{
+						var cssSelected = SelecHour == str ? "rounded-sm bg-orange-200 text-orange-600" : "";
+						<button class="@cssSelected hover:text-orange-400 px-4 font-semibold" @onclick="() => OnHourClick(str)">@str</button>
+					}
+				</div>
+				<button class="prev-hour absolute left-0 top-0 text-2xl">&lt;</button> 
+                <button class="next-hour absolute right-0 top-0 text-2xl">&gt;</button>
+			</div>
+
+			
+		</div>
+
+
+		<div class="flex justify-between py-3">
+			<div class="flex-col">
+				<div class="">Nhận-Trả phòng</div>
+				<div class="text-base font-semibold">@SelectTime</div>
+			</div>
+			<div class="grid content-center">
+				<button class="bg-orange-600 px-4 py-2 rounded-md text-lg text-white" @onclick="Toggle" type="button">Tiếp Theo</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@code {
+	private (DateTime,DateTime) _value;
+
+	[Parameter]
+	public (DateTime,DateTime) Value
+	{
+		get => _value;
+		set
+		{
+			if (_value == value ) return;
+			_value = value;
+			ValueChanged.InvokeAsync(value);
+		}
+	}
+
+	//
+	[Parameter]
+	public EventCallback<(DateTime,DateTime)> ValueChanged { get; set; }
+
+	public string SelecTime { get; set; } = string.Empty;
+	public string SelecHour { get; set; } = string.Empty;
+
+	bool _isShow;
+
+	public List<string> lstTimes { get; set; } = new(); //[6:00, 6:30, 7:00 . . . ]
+	public List<string> lstHours { get; set; } = new(); //[1 gio, 2 gio 3 gio  . . . ]
+
+	protected override void OnInitialized()
+	{
+		for (var i = 1; i < 11; i++)
+		{
+			lstHours.Add(i + "giờ");
+		}
+	//init Time [6:00, 6:30, 7:00 . . . ]
+		var a = 600;
+		while (a <= 2100)
+		{
+			var b = a.ToString().Select(x => x.ToString()).ToArray();
+
+			var str = "";
+			str += b[0];
+			if (b.Length == 3)
+			{
+				str += ":" + (b[1] == "5" ? "3" : "0") + b[2];
+			}
+			else
+			{
+				str += b[1] + ":" + (b[2] == "5" ? "3" : "0") + b[3];
+			}
+			lstTimes.Add(str);
+			a += 50;
+		}
+
+		SelecTime = lstTimes[0];
+		SelecHour = lstHours[0];
+		Value = (DateTime.Now, DateTime.Now);
+		UpdateTimeState(Value.Item1);
+		
+	}
+
+	void UpdateTimeState(DateTime date)
+	{
+		var arr = SelecTime.Split(":");
+
+
+		var hour = int.Parse(arr[0]);
+		var minute = int.Parse(arr[1]);
+
+		var date1 = new DateTime(date.Year, date.Month, date.Day, hour, minute, 0);
+		var date2 = date1.AddHours(lstHours.IndexOf(SelecHour) + 1);
+		Value = (date1,date2);
+		if (Value.Item1.Day == Value.Item2.Day)
+		{
+			SelectTime = Value.Item1.ToString("HH:mm - ") + Value.Item2.ToString("HH:mm, ") + Value.Item1.ToString("dd/MM");
+		}
+		else
+		{
+			SelectTime = Value.Item1.ToString("HH:mm, dd/MM") + " - " + Value.Item2.ToString("HH:mm, dd/MM");
+		}
+		StateHasChanged();
+	}
+
+	private void OnTimeClick(string str)
+	{
+		SelecTime = str;
+		UpdateTimeState(Value.Item1);
+	}
+
+	private void OnHourClick(string str)
+	{
+		SelecHour = str;
+		UpdateTimeState(Value.Item1);
+	}
+
+	private void Toggle()
+	{
+		_isShow = !_isShow;
+
+		StateHasChanged();
+	}
+
+	private void OnSeSelected(DateTime date)
+	{
+		UpdateTimeState(date);
+	}
+
+	public object SelectTime { get; set; } = string.Empty;
+
+}

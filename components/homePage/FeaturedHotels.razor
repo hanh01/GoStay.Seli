@@ -1,0 +1,55 @@
+@using GoStay.Peter
+@using GoStay.Peter.Models.TopListingModel
+@using System.Collections.ObjectModel
+@using System.Linq
+@using GoStay.Seli.srcComponent
+@using HotelApiV56.Model
+@inject IJSRuntime JSRuntime
+
+
+<section class="py-5 font-sans">
+    <div class="flex justify-between tracking-wide"> 
+        <div class="text-[#FF0F00] w-[310px] xl:text-2xl text-lg font-bold ">KHÁCH SẠN NỔI BẬT</div>
+        <div class="sm:grid hidden content-end w-full mb-2">
+            <hr class="border-[#A0A4B8]"/>
+        </div>
+    </div>
+
+    <div class="relative my-2">
+        <div class="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6 py-5">
+            @if (null != ListTops)
+            {
+                @foreach (var  item in ListTops)
+                {
+                    @if (null != item)
+                    {
+                        <ItemListTop Item="@item"></ItemListTop>
+                    }
+                }
+            }
+        </div>
+        <div class="flex justify-center items-center">
+            <button class="bg-white border border-[#9BB5C4] py-2 px-5 text-[#9BB5C4] rounded-md">Xem thêm</button>
+        </div>
+    </div>
+</section>
+
+@code {
+
+    private Task<IJSObjectReference>? _module;
+    const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+    
+    private IEnumerable<GohomeTopListing> ListTops { get; set; }  = new List<GohomeTopListing>();
+    
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ListTops =( await Api.GetIns().HomePageNewApi.GetListingsTopNewAsync()).OrderBy(x => x.Position);
+            StateHasChanged();
+        }
+    }
+    
+}

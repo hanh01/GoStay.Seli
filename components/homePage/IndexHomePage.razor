@@ -1,0 +1,42 @@
+@using GoStay.Peter
+@inject IJSRuntime JSRuntime
+@inject Flowbie IFlowbie
+
+
+<div class="bg-[url('images/imgHomePage/bgBody.png')]">
+    <HeaderPage></HeaderPage>
+    <div class="-mt-3 lg:-mt-14 sticky top-0 z-30 ">
+        <FormSearch></FormSearch>
+    </div>
+    <Filter></Filter>
+    <div class="container mx-auto xl:px-14 px-5 font-sans ">
+        <Promotions></Promotions>
+
+        <FeaturedHotels></FeaturedHotels>
+
+        <SpecialOffer></SpecialOffer>
+    </div>
+    <Footer></Footer>
+</div>
+
+<NugetComponent ComponentName=@NalaComponentName.AddFavoritesPopup PackageName=@PackageName.Nala></NugetComponent> 
+
+@code {
+    private Task<IJSObjectReference>? _module;
+    const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import",
+    ImportPath).AsTask();
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.slickSlider");
+        await module.InvokeVoidAsync("Seli.scrollFormSearch",380);
+        IFlowbie.initDropdown();
+        IFlowbie.initModal();
+        StateHasChanged();
+    }
+
+}
+
+

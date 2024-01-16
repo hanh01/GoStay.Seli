@@ -1,0 +1,87 @@
+@using GoStay.Peter
+@using GoStay.Peter.Models.TopListingModel
+@using HotelApiV56.Model
+@inject IJSRuntime JsRuntime
+
+@if (DataItem != null)
+{
+    <div class="relative layout-slide-img" @onmouseover="MouseOver" @onmouseout="MouseOut">
+        <div class="slide-image-homepage-@DataItem.Listing.Id layout-slick-dotted rounded-md overflow-hidden 2xl:h-52 xl:h-52 h-36">
+            @for (int i = 0; i < ThumbnailUrls.Count; i++)
+            {
+                <div class="w-full bg-gray-100 bg-no-repeat object-cover border-hidden " style="background-position: center">
+                    <img data-lazy="@ThumbnailUrls[i]" alt=""
+                         class="relative w-full 2xl:h-52 xl:h-52 h-36 opacity-225 object-cover hover:scale-105 hover:opacity-80 transition duration-200 ease-in-out border border-hidden">
+                </div>
+                if (i == MaxCountImage - 1)
+                {
+                    break;
+                }
+            }
+        </div>
+        <div class="w-full @CssFormBtn">
+            <button
+                class="img-prev-@DataItem.Listing.Id absolute top-0 left-0 items-center justify-center h-full cursor-pointer group focus:outline-none">
+                <span
+                    class="inline-flex items-center justify-center rounded-full w-8 h-8 bg-white/30 shadow-sm shadow-gray-300 group-hover:shadow-orange-300 hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                    <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                </span>
+            </button>
+            <button
+                class="img-next-@DataItem.Listing.Id absolute top-0 right-0 items-center justify-center h-full cursor-pointer group focus:outline-none">
+                <span
+                    class="inline-flex items-center justify-center rounded-full w-8 h-8 bg-white/30 shadow-sm shadow-gray-300 group-hover:shadow-orange-300  hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                    <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                        </path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    [Parameter]
+    public List<string> ThumbnailUrls { get; set; } = new();
+
+    [Parameter]
+    public int MaxCountImage { get; set; }
+
+    [Parameter]
+    public GohomeTopListing? DataItem { get; set; }
+
+    private int _countLoadedImage = 0;
+    private string CssFormBtn { get; set; } = "hidden";
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.slickSliderImgHomeStay", DataItem?.Listing.Id);
+    }
+
+    private void MouseOver(MouseEventArgs e)
+    {
+        CssFormBtn = "flex";
+    }
+
+    private void MouseOut(MouseEventArgs e)
+    {
+        CssFormBtn = "hidden";
+    }
+
+
+
+}

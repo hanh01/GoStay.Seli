@@ -1,0 +1,85 @@
+{
+  "format": 1,
+  "restore": {
+    "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/GoStay.Seli.csproj": {}
+  },
+  "projects": {
+    "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/GoStay.Seli.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/GoStay.Seli.csproj",
+        "projectName": "GoStay.Seli",
+        "projectPath": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/GoStay.Seli.csproj",
+        "packagesPath": "/Users/dohonghanh/.nuget/packages/",
+        "outputPath": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/NuGet.Config",
+          "/Users/dohonghanh/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.zozoteam.net/repository/nuget-hosted/": {},
+          "https://nuget.zozoteam.net/repository/nuget-hosted/": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "BlazorDateRangePicker": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "GoStay.HotelApi": {
+              "target": "Package",
+              "version": "[2022.12.7.80853, )"
+            },
+            "GoStay.Peter": {
+              "target": "Package",
+              "version": "[2022.12.8.94114, )"
+            },
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[6.0.8, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "Hash": "EVNFvOYGPHAlRMQHFcdnYqJhZx9AqJPJrgL7I0qrwto=",
+  "Source": "GoStay.Seli",
+  "BasePath": "_content/GoStay.Seli",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "GoStay.Seli/wwwroot",
+      "Source": "GoStay.Seli",
+      "ContentRoot": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/",
+      "BasePath": "_content/GoStay.Seli",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/background.png",
+      "SourceId": "GoStay.Seli",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/",
+      "BasePath": "_content/GoStay.Seli",
+      "RelativePath": "background.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/background.png"
+    },
+    {
+      "Identity": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/css/style.css",
+      "SourceId": "GoStay.Seli",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/",
+      "BasePath": "_content/GoStay.Seli",
+      "RelativePath": "css/style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/style.css"
+    },
+    {
+      "Identity": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/exampleJsInterop.js",
+      "SourceId": "GoStay.Seli",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/",
+      "BasePath": "_content/GoStay.Seli",
+      "RelativePath": "exampleJsInterop.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/exampleJsInterop.js"
+    },
+    {
+      "Identity": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/js/script.js",
+      "SourceId": "GoStay.Seli",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Volumes/Data/GofaStay/GoStay/GoStay.Seli/wwwroot/",
+      "BasePath": "_content/GoStay.Seli",
+      "RelativePath": "js/script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/script.js"
+    }
+  ]
+}

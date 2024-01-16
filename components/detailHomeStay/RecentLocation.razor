@@ -1,0 +1,111 @@
+@inject IJSRuntime JSRuntime
+
+<section>
+    <div class="flex justify-between tracking-wide">
+        <div class=" w-[450px] text-2xl font-bold ">KHÁCH SẠN XUNG QUANH</div>
+        <div class="sm:grid hidden content-end w-full mb-2">
+            <hr class="border-[#A0A4B8]"/>
+        </div>
+    </div>
+    
+    <div class="relative my-3">
+        <div class="slider-suggest h-auto">
+            <a href="/home-stay">
+                <div class="flex flex-col pr-4">
+                    <img class="w-full h-auto rounded-lg"
+                         src="_content/GoStay.Seli/images/imgHomePage/FeaturedHotel2.png"/>
+                    <div class="text-sm font-sans py-3">
+                        <p class="text-xs uppercase text-gray-600 mb-2">Hà Nội nội thành lãng mạn</p>
+                        <p class="hover:text-[#f65e39]">Không gian lãng mạn dành cho cặp đôi tại trung tâm Hà Nội</p>
+                    </div>
+                </div>
+            </a>
+            <a href="/home-stay">
+                <div class="flex flex-col pr-4">
+                    <img class="w-full h-auto rounded-lg"
+                         src="_content/GoStay.Seli/images/imgHomePage/FeaturedHotel2.png"/>
+                    <div class="text-sm font-sans py-3">
+                        <p class="text-xs uppercase text-gray-600 mb-2">Sài Gòn cần là có ngay</p>
+                        <p class="hover:text-[#f65e39]">
+                            Những căn homestay có 01 phòng ngủ tại Sài Gòn có thể đặt nhanh
+                            chóng
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="/home-stay">
+                <div class="flex flex-col pr-4">
+                    <img class="w-full h-auto rounded-lg"
+                         src="_content/GoStay.Seli/images/imgHomePage/FeaturedHotel2.png"/>
+                    <div class="text-sm font-sans py-3">
+                        <p class="text-xs uppercase text-gray-600 mb-2">Bể bơi & BBQ</p>
+                        <p class="hover:text-[#f65e39]">
+                            Trải nghiệm đẳng cấp tại những căn homestay có bể bơi đẹp và khu
+                            vực BBQ ấm cúng.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="/home-stay">
+                <div class="flex flex-col pr-4">
+                    <img class="w-full h-auto rounded-lg"
+                         src="_content/GoStay.Seli/images/imgHomePage/FeaturedHotel2.png"/>
+                    <div class="text-sm font-sans py-3">
+                        <p class="text-xs uppercase text-gray-600 mb-2">Siêu giảm giá!</p>
+                        <p class="hover:text-[#f65e39]">
+                            Top chỗ ở giảm giá đến 50% từ các chủ nhà thân thiện trên
+                            Luxstay.
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <a href="/home-stay">
+                <div class="flex flex-col pr-4">
+                    <img class="w-full h-auto rounded-lg"
+                         src="_content/GoStay.Seli/images/imgHomePage/FeaturedHotel2.png"/>
+                    <div class="text-sm font-sans py-3">
+                        <p class="text-xs uppercase text-gray-600 mb-2">Gần Trung tâm!</p>
+                        <p class="hover:text-[#f65e39]">Không gian lãng mạn dành cho cặp đôi tại trung tâm Hà Nội</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <button
+            class="prev-suggest absolute top-0 left-0 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+            <span
+                class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-white/30 shadow-sm shadow-gray-300 group-hover:shadow-orange-300 hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 " fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                    </path>
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button
+            class="next-suggest absolute top-0 right-0 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+            <span
+                class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-white/30 shadow-sm shadow-gray-300 group-hover:shadow-orange-300  hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 " fill="none"
+                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                    </path>
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
+    </div>
+</section>
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.slickSlider");
+    }
+}

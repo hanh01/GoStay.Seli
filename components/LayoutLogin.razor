@@ -1,0 +1,279 @@
+@inject IJSRuntime JSRuntime
+@using BlazorDateRangePicker
+@using GoStay.Peter
+@inject Flowbie IFlowbie
+@using Microsoft.AspNetCore.Components.Authorization
+
+
+<nav>
+    <div class="flex justify-between text-white">
+        <div class="flex gap-2">
+            <div class="py-1 px-3.5 bg-white rounded-lg text-[#394047] text-3xl font-bold">
+                <a href="/" class="cursor-pointer">B</a>
+            </div>
+            <div class="flex lg:hidden xl:flex">
+                <div >
+                    <p class="font-semibold">OOKING ROOM</p>
+                    <p class="font-thin text-xs tracking-widest leading-4">Du lich khap muon noi</p>
+                </div>
+            </div>
+        </div>
+        <div class="md:flex gap-5 hidden">
+            <div class="flex">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/>
+                    </svg>
+                </div>
+                <div class="flex items-end text-[10px]">
+                    <p>VN</p>
+                </div>
+            </div>
+            <AuthorizeView>
+                <Authorized>
+                    <div data-dropdown-toggle="dropdownST" class="flex gap-3 py-1.5 px-3 bg-white rounded-3xl text-[#424F64] text-lg border border-gray-200">
+                        <img class="w-8 h-8 rounded-full overflow-hidden" src="_content/GoStay.Seli/images/imgHomePage/Momo.png" alt="">
+                        <div class="grid content-center">
+                            <div class="flex gap-4">
+                                <p class="hover:text-[#5D7293]">@Helper.GetAuthorizationInfo(@context).FullName</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dropdownST" class="absolute text-sm hidden w-[200px] mt-10 px-3 bg-white rounded-lg divide-y divide-gray-100 shadow z-10" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+                        <ul class="py-2 text-sm text-[#424F64]" aria-labelledby="dropdownDefault">
+                            <li >
+                                <div class="flex items-center py-2 rounded-md hover:bg-gray-100">
+                                    <div class="flex items-center gap-1 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
+                                        </svg>
+                                        <p>Xem hồ sơ</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex items-center py-2 rounded-md hover:bg-gray-100 ">
+                                    <div class="flex items-center gap-1 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
+                                        </svg>
+                                        <p>Đặt phòng của tôi</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex items-center py-2 rounded-md hover:bg-gray-100 ">
+                                    <div class="flex items-center gap-1 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                                        </svg>
+                                        <a href="@PageName.Wishlists" >Danh sách yêu thích</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex items-center py-2 rounded-md hover:bg-gray-100 ">
+                                    <div class="flex items-center gap-1 ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"/>
+                                        </svg>
+                                        <a href="@PageName.Logout">Log out</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div class="flex gap-2 py-2.5 px-3 bg-white rounded-lg text-[#424F64] text-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 fill-[#A9A9A9] stroke-[#A9A9A9]">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+                        </svg>
+                        <div class="grid content-center">
+                            <div class="flex gap-2">
+                                <a class="hover:text-[#A9A9A9]" href="@PageName.LoginPage">Login in</a>
+                                <p>/</p>
+                                <a class="hover:text-[#A9A9A9]" href="@PageName.Register">Sign up</a>
+                            </div>
+                        </div>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+
+        <!-- Hamburger Button -->
+        <button id="menu-btn" @onclick="async () => await navToggle()"
+                class="block hamburger md:hidden focus:outline-none mr-2" type="button">
+            <span class="hamburger-top"></span>
+            <span class="hamburger-middle"></span>
+            <span class="hamburger-bottom"></span>
+        </button>
+        <!-- Mobile Menu -->
+        <div id="menu"
+             class="absolute hidden lg:hidden p-6 rounded-lg bg-white border border-gray-100 shadow-lg right-0 top-20 z-100">
+            <div class="flex flex-col items-center justify-center w-full space-y-6 font-medium text-black">
+                <a href="@PageName.LoginPage"
+                   class="w-full pt-6 text-center hover:text-orange-400">
+                    Login
+                </a>
+                <a href="@PageName.Register"
+                   class="w-full py-3 border-b border-gray-400 text-center hover:text-orange-400">
+                    Sign Up
+                </a>
+                <button id="btn-dropdown-mobie" @onclick="async () => await dropDownVDNMobie()"
+                        data-dropdown-toggle="dropdown-mobie"
+                        class="text-gray-700 bg-gray-100 focus:ring-1 focus:outline-none font-medium rounded-3xl text-sm px-4 py-2.5 text-center inline-flex items-center"
+                        type="button">
+                    VND
+                    <svg class="pl-3 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor"
+                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M19 9l-7 7-7-7">
+                        </path>
+                    </svg>
+                </button>
+                <div id="dropdown-mobie"
+                     class="hidden w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                        aria-labelledby="btn-dropdown-mobie">
+                        <li>
+                            <a href="#"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Earnings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"
+                               class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                Sign
+                                out
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+@code {
+    #region javascript
+    private Task<IJSObjectReference>? _module;
+        private IJSObjectReference module = default!;
+    
+        @* TODO: You need to replace MyRazorClassLibrary with the actual name of your library *@
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+        private Task<IJSObjectReference> Module => _module ??= JSRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+        protected override async Task OnInitializedAsync()
+        {
+            this.module = await Module;
+        }
+    
+        protected override void OnAfterRender(bool firstRender)
+        {
+           IFlowbie.initDropdown();
+        }  
+    
+        private async Task navToggle()
+        {
+            await this.module.InvokeVoidAsync("Seli.navToggle");
+        }
+        private async Task dropDownVDNMobie()
+        {
+            await this.module.InvokeVoidAsync("Seli.dropDownVDNMobie");
+        }
+        private async Task showPopupCount()
+        {
+            await this.module.InvokeVoidAsync("Seli.showPopupCount");
+        }
+    #endregion
+    
+    #region Total Guest
+    private int Adults = 0;
+    private int Children = 0;
+    private int Infant = 0;
+    private int totalCountGuest = 0;
+    private string Count = "Số";
+    
+    private void IncrementCount(int count,string name)
+    {
+        if (name == "Adults")
+        {
+            count++;
+            Adults = count;
+        }else if (name == "Children")
+        {
+            count++;
+            Children = count;
+        }
+        else
+        {
+            count++;
+            Infant = count;
+        }
+    }
+    private void UnIncrementCount(int count,string name)
+    {
+        if (count > 0)
+        {
+            if (name == "Adults")
+            {
+                count--;
+                Adults = count;
+            }else if (name == "Children")
+            {
+                count--;
+                Children = count;
+            }
+            else
+            {
+                count--;
+                Infant = count;
+            }
+        }
+        else
+        {
+            count = 0;
+        }
+    }
+    
+    // btn ap dung
+    private void ApplyTotalCountGuest()
+    {
+        totalCountGuest = Adults + Children + Infant;
+        if (totalCountGuest == 0)
+        {
+            Count = "Số";
+        }
+        else
+        {
+            Count = totalCountGuest.ToString();
+        }
+        this.module.InvokeVoidAsync("Seli.showPopupCount");
+    }
+    // btn xoa
+    private void RemoveTotalCountGuest()
+    {
+        Adults = 0;
+        Children = 0;
+        Infant = 0;
+        Count = "Số";
+        this.module.InvokeVoidAsync("Seli.showPopupCount");
+    }
+    #endregion
+   
+}

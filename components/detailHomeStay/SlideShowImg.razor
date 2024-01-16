@@ -1,0 +1,88 @@
+@using GoStay.Peter.Models.ListingDetail
+@using GoStay.Peter
+@inject IJSRuntime JSRuntime
+@inject Flowbie Flowbie
+@inject IJSRuntime JsRuntime
+
+
+<!-- Extra Large Modal -->
+<div id="modelSlider" tabindex="-1"  @ontoggle="OnToggle"
+    class="hidden  fixed top-0 right-0 left-0 z-50 w-full bg-black">
+    <div class="relative w-full h-[100vh]">
+        <!-- Modal content -->
+        <div class="relative bg-black dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="sticky top-0 bg-black">
+                <div class="py-6 pl-6">
+                    <button type="button" class="flex text-white text-sm hover:bg-neutral-600 p-1.5 rounded-lg gap-2"
+                        data-modal-toggle="modelSlider">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg><span>Đóng</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Modal body -->
+            <div class="relative w-full h-full flex items-center justify-center py-28">
+                <div class="md:w-1/2 w-full mx-auto lg:h-[800px] md:h-[500px] h-[300px]">
+                    <div class="detail-room lg:h-[800px] md:h-[500px] h-[300px]">
+                        @foreach (var item in ImageUrls)
+                        {
+                            <div class="w-full">
+                                <div class="grid place-content-center">
+                                    <img class="w-auto lg:h-[800px] md:h-[500px] h-[300px] object-cover" src="@item" alt=""/>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <button
+                        class="img-all-prev absolute top-0 md:left-10 left-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                        <span
+                            class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-black shadow-sm border-2 border-white hover:bg-neutral-600 group-focus:bg-black/50">
+                            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15 19l-7-7 7-7">
+                                </path>
+                            </svg>
+                            <span class="sr-only">Previous</span>
+                        </span>
+                    </button>
+                    <button
+                        class="img-all-next absolute top-0 md:right-10 right-0 z-30 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                        <span
+                            class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-black shadow-sm border-2 border-white hover:bg-neutral-600 group-focus:bg-black/50">
+                            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                            <span class="sr-only">Next</span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+    
+    [Parameter]
+    public string[] ImageUrls { get; set; } = {};
+
+    private async void OnToggle()
+    {
+        var id= await  Flowbie.getDataModal("modelSlider");
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.slickSliderImgAll",id);
+    }
+
+}

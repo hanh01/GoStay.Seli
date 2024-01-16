@@ -1,0 +1,199 @@
+
+@using GoStay.Seli.srcComponent
+@using GoStay.Peter
+@using System.Diagnostics
+@using HotelApiV56.Model
+@using System.Collections.ObjectModel
+@inject IJSRuntime JsRuntime
+
+
+@if (Evaluation != null && CommentListing != null)
+{
+ <div id="comment" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full ">
+    <div class="relative p-4 w-full max-w-6xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="p-5 rounded-t border-b dark:border-gray-600">
+                <button type="button" @onclick="ShowScroll" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="comment">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="flex flex-col gap-6 h-full lg:h-[85vh] h-[90vh] py-4" style="color: black !important;">
+                <div class="grid md:grid-cols-3 grid-cols-1">
+                    <div class="col-span-1 flex flex-col gap-4 pl-5" >
+                        <div class="flex text-3xl font-bold gap-2">
+                            <p>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8">
+                                    <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"/>
+                                </svg>
+                            </p>
+                            <p class="tracking-wide">@(Evaluation?.ReviewSummary == null ? "0.0" : (Evaluation.ReviewSummary.TotalReviewers == 0 ? "0.0" : String.Format("{0:0.0}", Evaluation.ReviewSummary.Ratings)))</p>
+                            <p class="tracking-wide">· @(Evaluation?.ReviewSummary == null || Evaluation.ReviewSummary.TotalReviewers == 0 ? "0" : Evaluation.ReviewSummary.TotalReviewers) đánh giá</p>
+                        </div>
+                    </div>
+                    <div class="col-span-2 flex flex-col lg:ml-16 ml-5 lg:my-0 my-3 pr-5">
+                        <form class="flex items-center ">
+                          <label for="simple-search" class="sr-only">Search</label>
+                          <div class="relative w-full">
+                              <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                                  <svg aria-hidden="true" class="w-5 h-5 text-black " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                                  </svg>
+                              </div>
+                              <input type="text" id="simple-search" class="bg-gray-50 border border-zinc-400 text-gray-900 text-sm rounded-full focus:ring-0 focus:border-black block w-full pl-10 p-3" 
+                                  @bind-value="@SearchText" @oninput="FilterChangedAsync" placeholder="Search" required>
+                          </div>
+                      </form>                      
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-3 grid-cols-1 ">
+                    <div class="col-span-1 pl-5">
+                        <div class="flex flex-col gap-2 w-full h-[20px] text-sm">
+                            <div class="flex gap-3 ">
+                                <div class="basis-2/6">Sạch sẽ</div>
+                                <div class="basis-3/6 ">
+                                    <div class="w-full py-2">
+                                        <div class="bg-gray-200 rounded-full h-1.5">
+                                            <div class="bg-red-600 rounded-full h-1.5" style="width: @(Evaluation?.ReviewSummary != null ? (String.Format("{0:0.0}", Evaluation.ReviewSummary.Cleanliness * 20)) : 0)%"></div>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                                <p class="basis-1/6">@(Evaluation?.ReviewSummary != null ? String.Format("{0:0.0}", Evaluation.ReviewSummary.Cleanliness) : 0.0)</p>
+                            </div>
+                            <div class="flex gap-3 ">
+                                <div class="basis-2/6">Thân thiện</div>
+                                <div class="basis-3/6 ">
+                                    <div class="w-full py-2">
+                                        <div class="bg-gray-200 rounded-full h-1.5">
+                                            <div class="bg-red-600 rounded-full h-1.5" style="width: @(Evaluation?.ReviewSummary != null ? (String.Format("{0:0.0}", Evaluation.ReviewSummary.Communication * 20)) : 0)%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="basis-1/6">@(Evaluation?.ReviewSummary != null ? String.Format("{0:0.0}", Evaluation.ReviewSummary.Communication) : 0.0)</p>
+                            </div>
+                            <div class="flex gap-3 ">
+                                <div class="basis-2/6">Chính xác</div>
+                                <div class="basis-3/6 ">
+                                    <div class="w-full py-2">
+                                        <div class="bg-gray-200 rounded-full h-1.5">
+                                            <div class="bg-red-600 rounded-full h-1.5" style="width: @(Evaluation?.ReviewSummary != null ? (String.Format("{0:0.0}", Evaluation.ReviewSummary.Accuracy * 20)) : 0)%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="basis-1/6">@(Evaluation?.ReviewSummary != null ? String.Format("{0:0.0}", Evaluation.ReviewSummary.Accuracy) : 0.0)</p>
+                            </div>
+                            <div class="flex gap-3 ">
+                                <div class="basis-2/6">Giá trị</div>
+                                <div class="basis-3/6 ">
+                                    <div class="w-full py-2">
+                                        <div class="bg-gray-200 rounded-full h-1.5">
+                                            <div class="bg-red-600 rounded-full h-1.5" style="width: @(Evaluation?.ReviewSummary != null ? (String.Format("{0:0.0}", Evaluation.ReviewSummary.Value * 20)) : 0)%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="basis-1/6">@(Evaluation?.ReviewSummary != null ? String.Format("{0:0.0}", Evaluation.ReviewSummary.Value) : 0.0)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-2 lg:ml-16 ml-5 lg:mt-0 mt-28 lg:h-[75vh] h-[65vh] overflow-y-auto pb-10">
+                        <div class="px-0 flex flex-col gap-5 pr-5">
+                            
+                            @for(int i=0; i < CommentListing.Count; i++)
+                            {
+
+                                <div class="flex flex-col gap-3">
+                                    <div class="flex gap-3">
+                                        <a href="/user/@CommentListing[i]?.User?.Id" data-modal-toggle="comment" @onclick="ShowScroll">
+                                            <img class="h-[40px] w-[40px] rounded-full" src="@(CommentListing[i]?.User == null ? CommentListing[i].GuestAvatar : (CommentListing[i].User?.AvatarUrl == "" ? "https://static.dayladau.com/home/public/assets/img/no_profile.17dcba4.png" : CommentListing[i].User?.AvatarUrl))" alt="">
+                                        </a>
+                                        <div>
+                                            <p class="text-base font-medium">@(CommentListing[i]?.User == null ? CommentListing[i].GuestName : CommentListing[i].User.Fullname)</p>
+                                            <p class="text-xs text-gray-500">@Common.DatetimeToString(Common.JavaTimeStampToDateTime(CommentListing[i].CreatedAt ?? 0))</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-sm text-gray-800 pl-14">
+                                        <p>@CommentListing[i].Comment</p>
+                                    </div>
+                                    
+                                    <div class="ml-10 flex flex-col gap-3 @(CommentListing[i]?.Reply == null || CommentListing[i].Reply == "" ? "hidden" : "")">
+                                        <div class="flex gap-3">
+                                            @if (ResponseHost != null)
+                                            {
+                                                @foreach (var host in ResponseHost)
+                                                {
+                                                    @if (host.Permission == 101)
+                                                    {
+                                                        <img class="h-[40px] w-[40px] rounded-full" src="@(host?.Host.AvatarUrl != "" ? host?.Host.AvatarUrl : "https://static.dayladau.com/home/public/assets/img/no_profile.17dcba4.png")" alt="">
+                                                    }
+                                                }
+                                            }
+                                            <div>
+                                                <p class="text-base font-medium">Phản hồi từ chủ nhà</p>
+                                                <p class="text-xs text-gray-500">@Common.DatetimeToString(Common.JavaTimeStampToDateTime(CommentListing[i].ReplyAt ?? 0))</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-sm text-gray-800 pl-14">
+                                            <p>@CommentListing[i].Reply</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   
+}
+
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+    
+    [Parameter]
+    public GohomeListingDetailForCus? Evaluation { get; set; }
+    
+    [Parameter]
+    public Collection<GohomeUserReviewListing>? CommentListing { get; set; }
+    
+    private IEnumerable<HostListing>? ResponseHost { get; set; }
+    
+    public string? SearchText { get; set; }
+    
+    string? ValueScroll { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(Evaluation != null)
+        ResponseHost = await Api.GetIns().ListingNewDetailPageApi.GetHostByListingIDAsync(Evaluation.Id);
+    }
+
+    private async void ShowScroll()
+    {
+        SearchText = null;
+        ValueScroll = "";
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.hideScroll",ValueScroll);
+    }
+
+    private async void FilterChangedAsync(ChangeEventArgs args)
+    {
+        if (Evaluation != null)
+        {
+            SearchText = args.Value.ToString();
+            CommentListing = await Api.GetIns().ListingNewDetailPageApi.GetReviewsByListingIdAsync(Evaluation.Id,SearchText);
+            await InvokeAsync(() => StateHasChanged());           
+        }
+    }
+    
+}

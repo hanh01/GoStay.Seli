@@ -1,0 +1,179 @@
+@using GoStay.Peter.Models.ListingDetail
+@using GoStay.Peter.Models
+@using GoStay.Peter
+@using System.Collections.ObjectModel
+@using GoStay.Seli.srcComponent
+@using HotelApiV56.Model
+@inject Flowbie Flowbie
+@inject IJSRuntime JsRuntime
+
+
+@if (Data != null)
+{
+    <section>
+        <div class="flex justify-between tracking-wide">
+            <div class=" w-[150px] text-2xl font-bold ">ĐÁNH GIÁ</div>
+            <div class="sm:grid hidden content-end w-full mb-2">
+                <hr class="border-[#A0A4B8]"/>
+            </div>
+        </div>
+
+        <div class="flex lg:flex-row flex-col my-5 rounded-lg bg-white py-5 text-[#5D7293] shadow-md">
+            <div class="basis-1/2 flex flex-col border-r border-[#D9D9D9] px-5">
+                <div class="lg:flex lg:justify-between grid grid-cols-2 gap-3 lg:text-xl text-sm ">
+                    <div class="flex items-center">
+                        <input checked id="checked-checkbox" type="checkbox" value="" class="w-6 h-6 text-[#BBD4FB] rounded-full border-1 border-[#98AFD3] focus:ring-0 checked:border-[#98AFD3]">
+                        <label for="checked-checkbox" class="ml-3 ">Tất cả<span class="text-[#98AFD3] pl-2">(118)</span></label>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="flex items-center">
+                            <input checked id="checked-checkbox" type="checkbox" value="" class="w-6 h-6 text-[#BBD4FB] rounded-full border-1 border-[#98AFD3] focus:ring-0 checked:border-[#98AFD3]">
+                            <label for="checked-checkbox" class="ml-3 ">Cặp đôi<span class="text-[#98AFD3] pl-2">(26)</span></label>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <input checked id="checked-checkbox" type="checkbox" value="" class="w-6 h-6 text-[#BBD4FB] rounded-full border-1 border-[#98AFD3] focus:ring-0 checked:border-[#98AFD3]">
+                        <label for="checked-checkbox" class="ml-3 ">Gia đình<span class="text-[#98AFD3] pl-2">(0)</span></label>
+                    </div>
+                    <div class="flex items-center">
+                        <input checked id="checked-checkbox" type="checkbox" value="" class="w-6 h-6 text-[#BBD4FB] rounded-full border-1 border-[#98AFD3] focus:ring-0 checked:border-[#98AFD3]">
+                        <label for="checked-checkbox" class="ml-3 ">Một mình<span class="text-[#98AFD3] pl-2">(8)</span></label>
+                    </div>
+                </div>
+                @if (Data?.ReviewSummary != null)
+                {
+                    <div class="flex">
+                        <div class="basis-1/3 lg:flex hidden">
+                            <div class="flex items-center justify-center" x-data="{ circumference: 2 * 22 / 7 * @(String.Format("{0:0.0}", Data?.ReviewSummary.Ratings * 20)) }">
+                                <svg class="transform -rotate-90 w-full h-60">
+                                    <circle cx="110" cy="120" r="89" stroke="currentColor" stroke-width="10" fill="transparent"
+                                            class="text-[#EBEBEB]"/>
+
+                                    <circle cx="110" cy="120" r="89" stroke="currentColor" stroke-width="10" fill="transparent"
+                                            :stroke-dasharray="circumference"
+                                            :stroke-dashoffset="circumference - 89 / 100 * circumference"
+                                            class="text-[#FF5A4F]"/>
+                                </svg>
+                                <div class="absolute grid place-content-center">
+                                    <p class="text-5xl text-[#FF5A4F]">@(Data?.ReviewSummary.Ratings == 0 ? "0.0" : String.Format("{0:0.0}", Data.ReviewSummary.Ratings))</p>
+                                    <p class="text-xl text-center text-[#5D7293]">@(Data.ReviewSummary.Ratings > 4 ? "Tuyệt vời" : "Tốt")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:basis-2/3 w-full flex flex-col gap-2 mt-3 py-10 lg:pl-10 pl-1">
+                            <div class="flex gap-3">
+                                <div class="mb-1 w-[100px] text-base">Sạch sẽ</div>
+                                <div class="grid content-center w-full">
+                                    <div class="bg-[#EBEBEB] rounded-full h-2.5 ">
+                                        <div class="bg-[#FF5A4F] h-2.5 rounded-full " style="width: @(String.Format("{0:0.0}", Data.ReviewSummary.Cleanliness * 20))%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="mb-1 w-[100px] text-base ">Thân thiện</div>
+                                <div class="grid content-center w-full">
+                                    <div class="bg-[#EBEBEB] rounded-full h-2.5 ">
+                                        <div class="bg-[#FF5A4F] h-2.5 rounded-full " style="width: @(String.Format("{0:0.0}", Data.ReviewSummary.Communication * 20))%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="mb-1 w-[100px] text-base ">Chính xác</div>
+                                <div class="grid content-center w-full">
+                                    <div class="bg-[#EBEBEB] rounded-full h-2.5 ">
+                                        <div class="bg-[#FF5A4F] h-2.5 rounded-full " style="width: @(String.Format("{0:0.0}", Data.ReviewSummary.Accuracy * 20))%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="mb-1 w-[100px] text-base ">Giá trị</div>
+                                <div class="grid content-center w-full">
+                                    <div class="bg-[#EBEBEB] rounded-full h-2.5 ">
+                                        <div class="bg-[#FF5A4F] h-2.5 rounded-full " style="width: @(String.Format("{0:0.0}", Data.ReviewSummary.Value * 20))%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @* comment user*@
+            <div class="basis-1/2 flex flex-col gap-3 text-[#5D7293] px-7">
+                @if (ReviewListing != null)
+                {
+                    @for (int i = 0; i < ReviewListing.Count; i++)
+                    {
+                        <div class="flex justify-between gap-2">
+                            <div>
+                                <a href="/user/@ReviewListing[i].User.Id" class="text-[#424F64] font-semibold">@(ReviewListing[i]?.User == null ? ReviewListing[i].GuestName : ReviewListing[i].User.Fullname) </a>
+                                <p class="leading-7">@ReviewListing[i].Comment</p>
+                            </div>
+                            <div class="grid content-start mt-1">
+                                <div class="float-right bg-[#DC3F34] rounded-md grid place-content-center">
+                                    <div class="flex gap-0.5 text-white px-2">
+                                        <div class="w-3.5 h-full grid content-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5 ">
+                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"/>
+                                            </svg>
+                                        </div>
+                                        <p class="text-sm text-white py-2.5 font-bold">@String.Format("{0:0.0}", ReviewListing[i].Overall)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (i == 2)
+                        {
+                            break;
+                        }
+                    }
+                }
+
+                <div>
+                    <button class="text-orange-500" type="button" @onclick="HideScroll" data-modal-toggle="comment">Xem thêm</button>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+<UserComment CommentListing="ReviewListing" Evaluation="Data"></UserComment>
+
+@code {
+    private Task<IJSObjectReference>? _module;
+        const string ImportPath = "./_content/GoStay.Seli/js/index.js";
+
+    private Task<IJSObjectReference> Module => _module ??= JsRuntime.InvokeAsync<IJSObjectReference>("import",
+        ImportPath).AsTask();
+
+    [Parameter]
+    public GohomeListingDetailForCus? Data { get; set; }
+
+    [Parameter]
+    public long? Id { get; set; }
+
+    string? ValueScroll { get; set; }
+
+    private Collection<GohomeUserReviewListing>? ReviewListing { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ReviewListing = await Api.GetIns().ListingNewDetailPageApi.GetReviewsByListingIdAsync(Id ?? 0, null);
+        await InvokeAsync(() => StateHasChanged());
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Flowbie.initModal();
+    }
+
+    private async void HideScroll()
+    {
+        ValueScroll = "hidden";
+        var module = await Module;
+        await module.InvokeVoidAsync("Seli.hideScroll", ValueScroll);
+    }
+
+
+}

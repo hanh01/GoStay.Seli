@@ -1,0 +1,100 @@
+@inject IJSRuntime JS
+
+<section class="py-6">
+    <div class="flex justify-between tracking-wide"> 
+        <div class="text-[#FF0F00] w-[230px] xl:text-2xl text-lg font-bold ">ƯU ĐÃI NỔI BẬT</div>
+        <div class="sm:grid hidden content-end w-full mb-2">
+            <hr class="border-[#A0A4B8]"/>
+        </div>
+    </div>
+
+    <div class="my-3">
+        <SliderHeader></SliderHeader>
+        <div class="relative my-3 lg:-mr-8 lg:-ml-5 mx-0">
+            <div class="slider-suggest h-[350px]">
+                <a href="/home-stay">
+                    <div class="flex flex-col bg-white lg:mx-5 mx-0 mb-2 py-3 px-5 xl:w-[320px] lg:w-[300px] md:w-[230px] sm:w-[280px]  w-full h-[350px] rounded-xl shadow-md">
+                        <img class="w-full h-auto rounded-lg"
+                             src="_content/GoStay.Seli/images/imgHomePage/SpecialOffer1.png"/>
+                        <div class="text-sm font-sans py-3">
+                            <p class="text-xs uppercase text-gray-600 mb-2">Hà Nội nội thành lãng mạn</p>
+                            <p class="hover:text-[#f65e39]">Không gian lãng mạn dành cho cặp đôi tại trung tâm Hà Nội</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/home-stay">
+                    <div class="flex flex-col bg-white lg:mx-5 mx-0 mb-2 py-3 px-5 xl:w-[320px] lg:w-[300px] md:w-[230px] sm:w-[280px]  w-full h-[350px] rounded-xl shadow-md">
+                        <img class="w-full h-auto rounded-lg"
+                             src="_content/GoStay.Seli/images/imgHomePage/SpecialOffer2.png"/>
+                        <div class="text-sm font-sans py-3">
+                            <p class="text-xs uppercase text-gray-600 mb-2">Sài Gòn cần là có ngay</p>
+                            <p class="hover:text-[#f65e39]">Những căn homestay có 01 phòng ngủ tại Sài Gòn có thể đặt nhanh
+                                chóng</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/home-stay">
+                    <div class="flex flex-col bg-white lg:mx-5 mx-0 mb-2 py-3 px-5 xl:w-[320px] lg:w-[300px] md:w-[230px] sm:w-[280px]  w-full h-[350px] rounded-xl shadow-md">
+                        <img class="w-full h-auto rounded-lg"
+                             src="_content/GoStay.Seli/images/imgHomePage/SpecialOffer3.png"/>
+                        <div class="text-sm font-sans py-3">
+                            <p class="text-xs uppercase text-gray-600 mb-2">Bể bơi & BBQ</p>
+                            <p class="hover:text-[#f65e39]">Trải nghiệm đẳng cấp tại những căn homestay có bể bơi đẹp và khu
+                                vực BBQ ấm cúng.</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/home-stay">
+                    <div class="flex flex-col bg-white lg:mx-5 mx-0 mb-2 py-3 px-5 xl:w-[320px] lg:w-[300px] md:w-[230px] sm:w-[280px]  w-full h-[350px] rounded-xl shadow-md">
+                        <img class="w-full h-auto rounded-lg"
+                             src="_content/GoStay.Seli/images/imgHomePage/SpecialOffer4.png"/>
+                        <div class="text-sm font-sans py-3">
+                            <p class="text-xs uppercase text-gray-600 mb-2">Siêu giảm giá!</p>
+                            <p class="hover:text-[#f65e39]">Top chỗ ở giảm giá đến 50% từ các chủ nhà thân thiện trên
+                                Luxstay.</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="/home-stay">
+                    <div class="flex flex-col bg-white lg:mx-5 mx-0 mb-2 py-3 px-5 xl:w-[320px] lg:w-[300px] md:w-[230px] sm:w-[280px]  w-full h-[350px] rounded-xl shadow-md">
+                        <img class="w-full h-auto rounded-lg"
+                             src="_content/GoStay.Seli/images/imgHomePage/SpecialOffer1.png"/>
+                        <div class="text-sm font-sans py-3">
+                            <p class="text-xs uppercase text-gray-600 mb-2">Gần Trung tâm!</p>
+                            <p class="hover:text-[#f65e39]">Không gian lãng mạn dành cho cặp đôi tại trung tâm Hà Nội</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <button
+                class="prev-suggest absolute top-0 -left-4 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                <span
+                    class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-white/50 shadow-sm shadow-gray-300 group-hover:shadow-orange-300 hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                    <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                        </path>
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button
+                class="next-suggest absolute top-0 -right-2 flex items-center justify-center h-full cursor-pointer group focus:outline-none">
+                <span
+                    class="inline-flex items-center justify-center rounded-full w-14 h-14 bg-white/50 shadow-sm shadow-gray-300 group-hover:shadow-orange-300  hover:bg-white group-focus:ring-orange-300 group-focus:ring-1 group-focus:bg-white">
+                    <svg aria-hidden="true" class="w-5 h-5 text-black sm:w-6 sm:h-6 dark:text-gray-800" fill="none"
+                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                        </path>
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+</section>
+
+@code {
+
+}

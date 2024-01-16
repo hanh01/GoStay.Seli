@@ -1,0 +1,23 @@
+@using GoStay.Peter
+@inject Flowbie IFlowbie
+
+<div class="w-full h-[100px] lg:h-[450px] bg-[url('images/imgHomePage/banner.jpg')] bg-no-repeat bg-cover">
+    <div class="grid content-center h-[85px] shadow-sm font-sans">
+        <div class="w-full mx-auto px-5 2xl:px-40">
+            <LayoutLogin></LayoutLogin>
+        </div>
+    </div>
+    <div class="lg:flex hidden justify-center -mt-16 2xl:ml-0 -ml-40">
+        <FormOption></FormOption>
+    </div>
+</div>
+
+
+
+@code {
+  protected override void OnAfterRender(bool firstRender)
+  {
+    IFlowbie.initDropdown();
+    base.OnAfterRender(firstRender);
+  }
+}

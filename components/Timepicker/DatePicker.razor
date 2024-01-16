@@ -1,0 +1,236 @@
+@using GoStay.Peter
+@if (Dates.Count == 35)
+{
+	<div class="flex flex-col gap-3 p-2">
+		<div class="grid grid-cols-4 py-2 border-b border-gray-200">
+			@if (Type == PickType.NONE || Type == PickType.START)
+			{
+				<button class="text-2xl flex justify-start col-span-1" disabled="@(DateTime.Now.Month <= Month && DateTime.Now.Year == Year)"@onclick="GoToBackMonth">&lt;</button>
+			}
+			else
+			{
+				<button class="col-span-1 invisible">&lt;</button>
+			}
+			
+			<div class="text-lg text-[#424F64] font-medium grid place-items-center col-span-2">@MthElemth</div>
+			
+			@if (Type == PickType.NONE || Type == PickType.END)
+			{
+				<button class="text-2xl flex justify-end col-span-1"@onclick="GoToNextMonth">&gt;</button>
+			}
+			else
+			{
+				<button class="col-span-1 invisible">&gt;</button>
+			}
+		</div>
+		<table class="">
+			<tbody >
+			<tr >
+				<!---->
+				<th class="@CssTableTr">T2</th>
+				<th class="@CssTableTr">T3</th>
+				<th class="@CssTableTr">T4</th>
+				<th class="@CssTableTr">T5</th>
+				<th class="@CssTableTr">T6</th>
+				<th class="@CssTableTr">T7</th>
+				<th class="@CssTableTr">CN</th>
+			</tr>
+			@for (var i = 0; i < 5; i++)
+			{
+				<tr class="h-75">
+					@for (var j = 0; j < 7; j++)
+					{
+						var date = Dates[i * 7 + j];
+						var gray = Month != date.Month || date.Compare(DateTime.Now) < 0 ? "text-gray-300" : "";
+						var pointerEvent = date.Compare(DateTime.Now) < 0 ? "pointer-events-none" : "pointer-events-auto";
+						var selected = gray.Length == 0 && ((Value.Item2 != DateTime.MinValue && Value.Item1.Compare(date) < 0 && Value.Item2.Compare(date) > 0) || Value.Item2.Compare(date) == 0 || Value.Item1.Compare(date) == 0) ? "rounded-50 bg-orange-100" : "";
+						var orange = selected.Length > 0 || DateTime.Now.Compare(date) == 0 ? "text-orange-600" : "";
+						var rounded = Value.Item2 == DateTime.MinValue || Value.Item1.Compare(Value.Item2) == 0 || gray.Length > 0 ? "rounded-full" : "";
+						if (rounded.Length == 0)
+						{
+							if (Value.Item1.Compare(date) == 0)
+							{
+								rounded = "rounded-l-full";
+							}
+							else if (Value.Item2.Compare(date) == 0)
+							{
+								rounded = "rounded-r-full";
+							}
+							else
+							{
+								rounded = "rounded-tb-sm";
+							}
+						}
+						<td class=" @rounded  @selected   @gray  @orange @pointerEvent  p-2  text-center text-1xl  hover:text-orange-400  "@onclick="() => { OnSelectDate(date); }">@(date.Day)</td>
+					}
+				</tr>
+			}
+			</tbody>
+		</table>
+	</div>
+}
+
+@code
+{
+	public enum PickType
+	{
+		NONE,
+		START,
+		END
+	}
+
+
+	[Parameter]
+	public PickType Type { get; set; } = PickType.NONE;
+
+	[Parameter]
+	public (DateTime,DateTime) Value { get; set; }
+
+	[Parameter]
+	public EventCallback<(DateTime,DateTime)> ValueChanged { get; set; }
+
+	[Parameter]
+	[EditorRequired]
+	public EventCallback<DateTime> Selected { get; set; }
+
+	[Parameter]
+	public EventCallback<int> MonthChange { get; set; }
+
+	private string CssTableTr { get; set; } = "text-[#878787] text-sm font-normal";
+
+	public int Day { get; set; }
+	public int Month { get; set; }
+	public int Year { get; set; }
+	public string MthElemth { get; set; } = string.Empty;
+	public List<DateTime> Dates = new();
+
+
+	private void GoToNextMonth()
+	{
+		UpdateMonth(1);
+	}
+
+	private void GoToBackMonth()
+	{
+		UpdateMonth(-1);
+	}
+
+	private void UpdateDayState()
+	{
+		var CurrentDate = new DateTime(month: Month, year: Year, day: 1);
+
+		var a = CurrentDate.GetDays();
+		var b = CurrentDate.AddMonths(-1).GetDays();
+		var c = CurrentDate.AddMonths(1).GetDays();
+		List<DateTime> days = new();
+		var lastCount = (int)a[0].DayOfWeek - 1;
+		if (lastCount < 0)
+		{
+			lastCount = 6;
+		}
+
+		for (var i = 1; i <= 35; i++)
+		{
+			if (days.Count == 35)
+			{
+				break;
+			}
+			if (lastCount > 0 && i <= lastCount)
+			{
+				for (var j = lastCount - 1; j >= 0; j--)
+				{
+					days.Add(b[b.Count - j - 1]);
+				}
+
+				i = lastCount;
+			}
+			else
+			{
+				if (days.Count < lastCount + a.Count)
+				{
+					days.Add(a[i - lastCount - 1]);
+				}
+				else
+				{
+					for (var j = 0; j <= 35 - i; j++)
+					{
+						days.Add(c[j]);
+					}
+				}
+			}
+		}
+	//Console.WriteLine(Month + "  " + Year);
+		MthElemth = "Tháng " + Month + "-" + Year;
+		Dates = days;
+		StateHasChanged();
+	}
+
+	private void OnSelectDate(DateTime date)
+	{
+	//Console.WriteLine("OnSelectDate " + Month);
+
+		if (Type == PickType.NONE)
+		{
+			Day = date.Day;
+			Month = date.Month;
+			Year = date.Year;
+		}
+
+		Selected.InvokeAsync(date);
+		UpdateDayState();
+	}
+
+
+	protected override void OnInitialized()
+	{
+		Day = Value.Item1.Day;
+		Month = Value.Item1.Month;
+		Year = Value.Item1.Year;
+		if (Type == PickType.END)
+		{
+			UpdateMonthFormOutSide(1);
+		}
+		else
+		{
+			UpdateDayState();
+		}
+	}
+
+	private void UpdateMonth(int delta)
+	{
+		Month += delta;
+		if (Month < 1)
+		{
+			Month = 12;
+			Year--;
+		}
+		if (Month > 12)
+		{
+			Month = 1;
+			Year++;
+		}
+		if (MonthChange.HasDelegate)
+		{
+			MonthChange.InvokeAsync(delta);
+		}
+	//Console.WriteLine("UpdateMonth " + delta + " " + Month);
+		UpdateDayState();
+	}
+
+	public void UpdateMonthFormOutSide(int delta)
+	{
+		Month += delta;
+		if (Month < 1)
+		{
+			Month = 12;
+			Year--;
+		}
+		if (Month > 12)
+		{
+			Month = 1;
+			Year++;
+		}
+		UpdateDayState();
+	}
+
+}

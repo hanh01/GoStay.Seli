@@ -1,0 +1,100 @@
+@using HotelApiV56.Model
+@using GoStay.Seli.srcComponent
+@inject NavigationManager NavigationManager
+
+@if (ResponseHost != null)
+{
+    <section>
+        <div class="flex justify-between tracking-wide">
+            <div class=" w-[150px] text-2xl font-bold">CHỦ NHÀ</div>
+            <div class="sm:grid hidden content-end w-full mb-2">
+                <hr class="border-[#A0A4B8]"/>
+            </div>
+        </div>
+
+
+        <div class="flex flex-col gap-5 my-5 text-[#424F64]">
+            @foreach (var host in ResponseHost)
+            {
+                @if (host.Permission == 101)
+                {
+                    <div class="flex w-full gap-4">
+                        <div>
+                            <button @onclick="() => User(host.Host.Id.ToString())">
+                                <img class="w-[70px] h-[70px] rounded-full" src="@(host.Host.AvatarUrl != "" ? host.Host.AvatarUrl : "https://static.dayladau.com/home/public/assets/img/no_profile.17dcba4.png")" alt="">
+                            </button>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold pt-1.5">Chủ nhà @host.Host.Fullname</p>
+                            <p class="text-lg text-gray-400 py-1">@host.Host.BrandName</p>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="flex text-[#5D7293]">
+                <div class="w-1/2">
+                    @foreach (var host in ResponseHost)
+                    {
+                        @if (host.Permission == 101)
+                        {
+                            <div class="flex gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                                </svg>
+                                <p>@(host.Permission == 101 ? host.Host.Address : "")</p>
+                            </div>
+                        }
+                    }
+                    <div class="pt-2">
+                        <p class="font-bold py-2 text-[#424F64]">Đồng chủ nhà</p>
+                        <div class="grid grid-cols-4">
+                            @foreach (var host in ResponseHost)
+                            {
+                                @if (host.Permission == 102)
+                                {
+                                    <div class="flex gap-3">
+                                        <img class="w-[40px] h-[40px] rounded-full" src="@(host.Host.AvatarUrl != "" ? host.Host.AvatarUrl : "https://static.dayladau.com/home/public/assets/img/no_profile.17dcba4.png")" alt="">
+                                        <div class="grid content-center">
+                                            <p class="text-sm">@host.Host.Fullname</p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/2">
+                    <p class="leading-8">Tỷ lệ phản hồi: 100%</p>
+                    <p class="leading-8">Thời gian phản hồi : Trong vòng 1 giờ</p>
+                    <button class="py-2 px-4 my-3 bg-none border border-black text-black rounded-md hover:bg-black hover:text-white">Liên hệ chủ nhà</button>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+}
+
+
+@code {
+
+    [Parameter]
+    public GohomeListingDetailForCus? Data { get; set; }
+
+    private IEnumerable<HostListing>? ResponseHost { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Data != null)
+        {
+            ResponseHost = await Api.GetIns().ListingNewDetailPageApi.GetHostByListingIDAsync(Data.Id);
+        }
+    }
+
+    private void User(string Id)
+    {
+        NavigationManager.NavigateTo("/user/" + Id);
+    }
+
+}
